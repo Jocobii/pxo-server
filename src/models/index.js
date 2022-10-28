@@ -44,4 +44,13 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+sequelize
+    .authenticate()
+    .then(() => {
+        console.log('🟢 Se ha conectado a la base de datos correctamente 🚀');
+    })
+    .catch((err) => {
+        console.log(`🚨 ${err} 🚨`);
+    });
+
 module.exports = db;
