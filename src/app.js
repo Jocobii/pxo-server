@@ -1,21 +1,27 @@
 const express = require('express');
 const cors = require('cors');
+const compression = require('compression');
+const morgan = require('morgan');
 const userRoutes = require('./v1/routes/users');
-const db = require('./models');
-const corsOptions = require('./config/cors'); // <--- import corsOptions
+require('./models');
+const { errorHandler, notFound } = require('./middlewares/errorsHandlers');
+const corsOptions = require('./config/cors');
 
+const PORT = process.env.PORT || 5000;
 const app = express();
 
+if (process.env.MORGAN === 'yes' && process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+
 app.use(cors(corsOptions));
-db.sequelize
-    .authenticate()
-    .then(() => {
-        console.log('🚀 Se ha conectado a la base de datos correctamente 🚀');
-    })
-    .catch((err) => {
-        console.log(`🚨 ${err} 🚨`);
-    });
-app.use(express.json());
+app.use(compression());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: false }));
+
 app.use('/api/v1/users', userRoutes);
 
-module.exports = app;
+app.use(notFound);
+app.use(errorHandler);
+
+app.listen(PORT, () => {
+    console.log(`🤓 Server listening on port ${PORT}...`);
+});
