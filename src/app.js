@@ -2,10 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const userRoutes = require('./v1/routes/users');
 const db = require('./models');
+const corsOptions = require('./config/cors'); // <--- import corsOptions
 
 const app = express();
 
-app.use(cors());
+app.use(cors(corsOptions));
 db.sequelize
     .authenticate()
     .then(() => {
