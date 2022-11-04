@@ -1,10 +1,10 @@
 const express = require('express');
 
 const router = express.Router();
-const workOutController = require('../../controllers/users');
+const user = require('../../controllers/user');
 
 router
-    .get('/', workOutController.getAllUsers)
+    .get('/', user.getAllUsers)
     .get('/:id', (req, res) => {
         res.send('Get one workouts');
     })

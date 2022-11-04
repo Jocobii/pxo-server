@@ -3,3 +3,4 @@ yarn.lock
 package-lock.json
 .env
 pnpm-lock.yaml
+yarn-error.log
