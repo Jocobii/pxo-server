@@ -1,4 +1,4 @@
-const models = require('../models/index');
+const models = require('../../models/index');
 
 const getAllUsers = async () => models.User.findAll();
 

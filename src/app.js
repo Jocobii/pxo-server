@@ -3,7 +3,6 @@ const cors = require('cors');
 const compression = require('compression');
 const morgan = require('morgan');
 const helmet = require('helmet');
-const userRoutes = require('./v1/routes/users');
 require('./models');
 const { errorHandler, notFound } = require('./middlewares/errorsHandlers');
 const corsOptions = require('./middlewares/cors');
@@ -19,7 +18,7 @@ app.use(helmet());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: false }));
 
-app.use('/api/v1/users', userRoutes);
+app.use('/', require('./v1/routes/router'));
 
 app.use(notFound);
 app.use(errorHandler);

@@ -9,15 +9,58 @@ module.exports = (sequelize, DataTypes) => {
      */
         static associate(models) {
             console.log(models);
-            // define association here
         }
     }
     User.init({
-        firstName: DataTypes.STRING,
-        lastName: DataTypes.STRING,
+        id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER,
+        },
+        first_name: {
+            type: DataTypes.STRING(30),
+            allowNull: false,
+        },
+        middle_name: {
+            type: DataTypes.STRING(30),
+            allowNull: true,
+        },
+        first_last_name: {
+            type: DataTypes.STRING(30),
+            allowNull: false,
+        },
+        second_last_name: {
+            type: DataTypes.STRING(30),
+            allowNull: true,
+        },
+        email: {
+            type: DataTypes.STRING(30),
+            allowNull: false,
+            unique: true,
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        deleted_at: {
+            allowNull: true,
+            type: DataTypes.DATE,
+        },
+        access_token: {
+            allowNull: true,
+            type: DataTypes.STRING,
+        },
+        isActive: {
+            allowNull: false,
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+        },
     }, {
+        timestamps: true,
         sequelize,
-        modelName: 'User',
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
     });
     return User;
 };
