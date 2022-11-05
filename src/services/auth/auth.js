@@ -1,14 +1,14 @@
 require('dotenv').config();
-const jwt = require('jsonwebtoken');
 const dayjs = require('dayjs');
 const models = require('../../models');
+const { generateToken } = require('./utils/jwt');
 const { standardResponse } = require('../utils/helpers');
-const validateUserSchema = require('../users/schema/user.schema');
 const { encryptPassword, comparePassword } = require('./utils/encrypt');
+const { plainObject } = require('../../utils/helpers');
 
 const signIn = async (req) => {
     const { email, password } = req.body;
-    const user = await models.User.findOne({ where: { email } });
+    const user = await models.User.findOne({ where: { email }, raw: true });
 
     if (!user) return standardResponse(true, 'Usuario o contrasena incorrecta');
 
@@ -16,18 +16,46 @@ const signIn = async (req) => {
 
     if (!isPasswordValid) return standardResponse(true, 'Usuario o contrasena incorrecta');
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-        expiresIn: 86_400,
-    });
+    const token = generateToken(user);
 
     await models.User.update({ access_token: token }, { where: { id: user.id } });
 
+    const userData = {
+        id: user.id,
+        firstName: user.first_name,
+        middleName: user.middle_name,
+        firstLastName: user.first_last_name,
+        secondLastName: user.second_last_name,
+        email: user.email,
+        accessToken: token,
+    };
+
     return {
         error: false,
-        data: { token },
+        data: { ...userData },
         message: 'Login successful',
         info: {},
     };
+};
+
+const recoveryPassword = async (req) => {
+    const { email, oldPassword, newPassword } = req.body;
+
+    if (oldPassword === newPassword) return standardResponse(true, 'La nueva contrasena no puede ser igual a la anterior');
+
+    const user = await models.User.findOne({ where: { email } });
+
+    if (!user) return standardResponse(true, 'El usuario no existe');
+
+    const areSamePassword = await comparePassword(oldPassword, user.password);
+
+    if (!areSamePassword) return standardResponse(true, 'La contrasena es incorrecta');
+
+    const encryptedNewPassword = await encryptPassword(newPassword);
+
+    await models.User.update({ password: encryptedNewPassword }, { where: { id: user.id } });
+
+    return standardResponse(false, 'La contrasena se actualizo correctamente');
 };
 
 const signUp = async (req) => {
@@ -41,33 +69,13 @@ const signUp = async (req) => {
             password,
         } = req.body;
 
-        const errors = validateUserSchema(req.body);
-
-        if (Array.isArray(errors)) {
-            return {
-                error: true,
-                message: 'Algunos campos no son obligatorios',
-                data: {},
-                info: {
-                    errores: errors.map((e) => e.message),
-                },
-            };
-        }
-
         const user = await models.User.findOne({ where: { email } });
 
-        if (user) {
-            return {
-                error: true,
-                message: 'El usuario ya existe en la base de datos',
-                data: {},
-                info: {},
-            };
-        }
+        if (user) return standardResponse(true, 'El usuario ya existe en la base de datos');
 
         const encryptedPassword = await encryptPassword(password);
 
-        const newUser = {
+        const newUserObject = {
             first_name: firstName,
             middle_name: middleName,
             first_last_name: firstLastName,
@@ -77,11 +85,13 @@ const signUp = async (req) => {
             created_at: dayjs().format('YYYY-MM-DD HH:mm:ss'),
         };
 
-        await models.User.create(newUser);
+        const newUser = plainObject(await models.User.create(newUserObject));
+
+        if (!newUser.id) return standardResponse(true, 'No se pudo crear el usuario');
 
         return {
             error: false,
-            data: newUser,
+            data: {},
             message: 'User created successfully',
             info: {},
         };
@@ -98,4 +108,5 @@ const signUp = async (req) => {
 module.exports = {
     signIn,
     signUp,
+    recoveryPassword,
 };
