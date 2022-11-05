@@ -8,6 +8,17 @@ const { plainObject, generateCode } = require('../../utils/helpers');
 const resetPasswordCode = require('./templates/emailTemplate');
 const { sendEmail } = require('./utils/email');
 
+const logout = async (req) => {
+    const { email } = req.body;
+    const user = await models.User.findOne({ attributes: ['id', 'access_token'], where: { email }, raw: true });
+
+    if (!user) return standardResponse(true, 'Usuario o contrasena incorrecta');
+
+    await models.User.update({ access_token: null }, { where: { id: user.id } });
+
+    return standardResponse(false, 'Logout successful');
+};
+
 const signIn = async (req) => {
     const { email, password } = req.body;
     const user = await models.User.findOne({ where: { email }, raw: true });
@@ -164,4 +175,5 @@ module.exports = {
     recoveryPasswordWithoutCode,
     recoveryPasswordWithCode,
     sendCodeRecovery,
+    logout,
 };
