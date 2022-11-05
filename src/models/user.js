@@ -7,9 +7,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-        static associate() {
-
-        }
+        static associate() {}
     }
     User.init({
         id: {
@@ -50,6 +48,10 @@ module.exports = (sequelize, DataTypes) => {
         access_token: {
             allowNull: true,
             type: DataTypes.STRING,
+        },
+        code_recovery: {
+            allowNull: true,
+            type: DataTypes.STRING(10),
         },
         isActive: {
             allowNull: false,

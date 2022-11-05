@@ -7,8 +7,8 @@ function jwt() {
     return expressjwt({ secret: SECRET, algorithms: [ALGORITHM] }).unless({
         path: [
             // public routes that don't require authentication
-            // '/api/v1/auth/sign-in',
-            // '/api/v1/auth/sign-up',
+            '/api/v1/auth/sign-in',
+            '/api/v1/auth/sign-up',
         ],
     });
 }
