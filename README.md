@@ -48,8 +48,19 @@ To run this project, you will need to add the following environment variables to
 
 `DIALECT = "mysql"`
 
-`NODE_ENV= "development"`
+`MORGAN= "yes"` # or no
 
+`JWT_SECRET= ""`
+
+`JWT_EXPIRATION= ""`
+
+`JWT_ALGORITHMS= ""`
+
+`AWS_USER= ""`
+
+`AWS_PASSWORD= ""`
+
+`EMAIL_SENDER= ""`
 ## Authors
 
 - [@Jocobii](https://github.com/Jocobii)
