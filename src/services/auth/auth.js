@@ -97,14 +97,16 @@ const sendCodeRecovery = async (req) => {
     await models.User.update({ code_recovery: code }, { where: { id: user.id } });
 
     const msg = {
-        to: email,
         from: process.env.EMAIL_SENDER,
+        to: email,
         subject: 'Codigo recuperacion',
         text: 'Código de recuperación',
         html: resetPasswordCode(code),
     };
 
-    await sendEmail(msg);
+    const itWasSended = await sendEmail(msg);
+
+    if (!itWasSended) return standardResponse(true, 'No se pudo enviar el correo');
 
     return standardResponse(false, 'El codigo de recuperacion se envio correctamente a su correo');
 };
