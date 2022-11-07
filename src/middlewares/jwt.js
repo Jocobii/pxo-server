@@ -10,6 +10,8 @@ function jwt() {
             '/api/v1/auth/sign-in',
             '/api/v1/auth/sign-up',
             '/api/v1/auth/logout',
+            '/api/v1/auth/send-code-recovery',
+            '/api/v1/auth/recovery-password',
         ],
     });
 }
