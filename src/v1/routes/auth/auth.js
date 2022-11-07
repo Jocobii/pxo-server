@@ -10,6 +10,7 @@ const {
 router
     .post('/sign-in', validateSignIn, auth.signIn)
     .post('/sign-up', validateSignUp, auth.signUp)
+    .post('/logout', auth.logout)
     .post('/recovery-password', auth.recoveryPassword)
     .post('/send-code-recovery', auth.sendCodeRecovery);
 

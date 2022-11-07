@@ -8,6 +8,17 @@ const { plainObject, generateCode } = require('../../utils/helpers');
 const resetPasswordCode = require('./templates/emailTemplate');
 const { sendEmail } = require('./utils/email');
 
+const logout = async (req) => {
+    const { email } = req.body;
+    const user = await models.User.findOne({ attributes: ['id', 'access_token'], where: { email }, raw: true });
+
+    if (!user) return standardResponse(true, 'Usuario o contrasena incorrecta');
+
+    await models.User.update({ access_token: null }, { where: { id: user.id } });
+
+    return standardResponse(false, 'Logout successful');
+};
+
 const signIn = async (req) => {
     const { email, password } = req.body;
     const user = await models.User.findOne({ where: { email }, raw: true });
@@ -97,14 +108,16 @@ const sendCodeRecovery = async (req) => {
     await models.User.update({ code_recovery: code }, { where: { id: user.id } });
 
     const msg = {
-        to: email,
         from: process.env.EMAIL_SENDER,
+        to: email,
         subject: 'Codigo recuperacion',
         text: 'Código de recuperación',
         html: resetPasswordCode(code),
     };
 
-    await sendEmail(msg);
+    const itWasSended = await sendEmail(msg);
+
+    if (!itWasSended) return standardResponse(true, 'No se pudo enviar el correo');
 
     return standardResponse(false, 'El codigo de recuperacion se envio correctamente a su correo');
 };
@@ -162,4 +175,5 @@ module.exports = {
     recoveryPasswordWithoutCode,
     recoveryPasswordWithCode,
     sendCodeRecovery,
+    logout,
 };
