@@ -9,6 +9,7 @@ router
     .get('/:id', (req, res) => {
         res.send('Get one workouts xddd');
     })
-    .put('/', userUpdateSchema, user.updateUser);
+    .put('/', userUpdateSchema, user.updateUser)
+    .delete('/:id', user.deleteUser);
 
 module.exports = router;

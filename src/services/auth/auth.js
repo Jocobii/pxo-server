@@ -12,22 +12,22 @@ const logout = async (req) => {
     const { email } = req.body;
     const user = await models.User.findOne({ attributes: ['id', 'access_token'], where: { email }, raw: true });
 
-    if (!user) return standardResponse(true, 'Usuario o contrasena incorrecta');
+    if (!user) return standardResponse(true, 422, 'Usuario o contrasena incorrecta');
 
     await models.User.update({ access_token: null }, { where: { id: user.id } });
 
-    return standardResponse(false, 'Logout successful');
+    return standardResponse(false, 200, 'Logout successful');
 };
 
 const signIn = async (req) => {
     const { email, password } = req.body;
     const user = await models.User.findOne({ where: { email }, raw: true });
 
-    if (!user) return standardResponse(true, 'Usuario o contrasena incorrecta');
+    if (!user) return standardResponse(true, 422, 'Usuario o contrasena incorrecta');
 
     const isPasswordValid = await comparePassword(password, user.password);
 
-    if (!isPasswordValid) return standardResponse(true, 'Usuario o contrasena incorrecta');
+    if (!isPasswordValid) return standardResponse(true, 422, 'Usuario o contrasena incorrecta');
 
     const token = generateToken(user);
 
@@ -54,21 +54,21 @@ const signIn = async (req) => {
 const recoveryPasswordWithoutCode = async (req) => {
     const { email, oldPassword, newPassword } = req.body;
 
-    if (oldPassword === newPassword) return standardResponse(true, 'La nueva contrasena no puede ser igual a la anterior');
+    if (oldPassword === newPassword) return standardResponse(true, 422, 'La nueva contrasena no puede ser igual a la anterior');
 
     const user = await models.User.findOne({ where: { email } });
 
-    if (!user) return standardResponse(true, 'El usuario no existe');
+    if (!user) return standardResponse(true, 404, 'El usuario no existe');
 
     const areSamePassword = await comparePassword(oldPassword, user.password);
 
-    if (!areSamePassword) return standardResponse(true, 'La contrasena es incorrecta');
+    if (!areSamePassword) return standardResponse(true, 422, 'La contrasena es incorrecta');
 
     const encryptedNewPassword = await encryptPassword(newPassword);
 
     await models.User.update({ password: encryptedNewPassword }, { where: { id: user.id } });
 
-    return standardResponse(false, 'La contrasena se actualizo correctamente');
+    return standardResponse(false, 200, 'La contrasena se actualizo correctamente');
 };
 
 const recoveryPasswordWithCode = async (req) => {
@@ -80,9 +80,9 @@ const recoveryPasswordWithCode = async (req) => {
         raw: true,
     });
 
-    if (!user) return standardResponse(true, 'El usuario no existe');
+    if (!user) return standardResponse(true, 404, 'El usuario no existe');
 
-    if (code !== user.code_recovery) return standardResponse(true, 'El codigo es incorrecto');
+    if (code !== user.code_recovery) return standardResponse(true, 400, 'El codigo es incorrecto');
 
     const encryptedNewPassword = await encryptPassword(newPassword);
 
@@ -91,17 +91,17 @@ const recoveryPasswordWithCode = async (req) => {
         code_recovery: null,
     }, { where: { id: user.id } });
 
-    return standardResponse(false, 'La contrasena se actualizo correctamente');
+    return standardResponse(false, 200, 'La contrasena se actualizo correctamente');
 };
 
 const sendCodeRecovery = async (req) => {
     const { email } = req.body;
 
-    if (!email) return standardResponse(true, 'El email es requerido');
+    if (!email) return standardResponse(true, 400, 'El email es requerido');
 
     const user = await models.User.findOne({ where: { email }, raw: true });
 
-    if (!user) return standardResponse(true, 'El usuario no existe');
+    if (!user) return standardResponse(true, 404, 'El usuario no existe');
 
     const code = generateCode();
 
@@ -117,9 +117,9 @@ const sendCodeRecovery = async (req) => {
 
     const itWasSended = await sendEmail(msg);
 
-    if (!itWasSended) return standardResponse(true, 'No se pudo enviar el correo');
+    if (!itWasSended) return standardResponse(true, 500, 'No se pudo enviar el correo');
 
-    return standardResponse(false, 'El codigo de recuperacion se envio correctamente a su correo');
+    return standardResponse(false, 200, 'El codigo de recuperacion se envio correctamente a su correo');
 };
 
 const signUp = async (req) => {
@@ -135,7 +135,7 @@ const signUp = async (req) => {
 
         const user = await models.User.findOne({ where: { email } });
 
-        if (user) return standardResponse(true, 'El usuario ya existe en la base de datos');
+        if (user) return standardResponse(true, 404, 'El usuario ya existe en la base de datos');
 
         const encryptedPassword = await encryptPassword(password);
 
@@ -151,7 +151,7 @@ const signUp = async (req) => {
 
         const newUser = plainObject(await models.User.create(newUserObject));
 
-        if (!newUser.id) return standardResponse(true, 'No se pudo crear el usuario');
+        if (!newUser.id) return standardResponse(true, 422, 'No se pudo crear el usuario');
 
         const newUserCreated = {
             id: newUser.id,
@@ -161,20 +161,9 @@ const signUp = async (req) => {
             second_last_name: newUser.second_last_name,
             email: newUser.email,
         };
-
-        return {
-            error: false,
-            data: newUserCreated,
-            message: 'User created successfully',
-            info: {},
-        };
+        return standardResponse(false, 200, 'El usuario se creo correctamente', newUserCreated);
     } catch (error) {
-        return {
-            error: true,
-            message: error.message,
-            data: {},
-            info: {},
-        };
+        return standardResponse(true, 500, error.message);
     }
 };
 
