@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
         },
         email: {
-            type: DataTypes.STRING(30),
+            type: DataTypes.STRING(100),
             allowNull: false,
             unique: true,
         },
