@@ -3,10 +3,15 @@ const { plainObject } = require('../../utils/helpers');
 const { standardResponse } = require('../utils/helpers');
 const { encryptPassword } = require('../auth/utils/encrypt');
 
-const getAllUsers = async () => models.User.findAll({
-    attributes: ['id', 'first_name', 'middle_name', 'first_last_name', 'second_last_name', 'email'],
-    order: [['id', 'DESC']],
-});
+const getAllUsers = async () => {
+    const users = await models.User.findAll({
+        attributes: ['id', 'first_name', 'middle_name', 'first_last_name', 'second_last_name', 'email'],
+        where: { isActive: true },
+        order: [['id', 'DESC']],
+    });
+
+    return standardResponse(false, 200, 'Usuarios encontrados', users);
+};
 
 const updateUser = async (req) => {
     const {
@@ -18,9 +23,9 @@ const updateUser = async (req) => {
         password,
     } = req.body;
 
-    const user = await models.User.findOne({ where: { id } });
+    const user = await models.User.findOne({ where: { id, isActive: true } });
 
-    if (!user) return standardResponse(404, 'El usuario no fue encontrado');
+    if (!user) return standardResponse(true, 404, 'El usuario no fue encontrado');
 
     const userToUpdate = {
         first_name,
@@ -45,10 +50,24 @@ const updateUser = async (req) => {
         email: updatedUser.email,
     };
 
-    return standardResponse(false, 'El usuario fue actualizado', userUpdeted);
+    return standardResponse(false, 200, 'El usuario fue actualizado', userUpdeted);
+};
+
+const deleteUser = async (req) => {
+    const { id } = req.params;
+    if (!id) return standardResponse(true, 400, 'El id del usuario es requerido');
+
+    const user = await models.User.findOne({ where: { id, isActive: true } });
+
+    if (!user) return standardResponse(true, 401, 'El usuario no fue encontrado');
+
+    await user.update({ isActive: false });
+
+    return standardResponse(false, 200, 'El usuario fue eliminado');
 };
 
 module.exports = {
     getAllUsers,
     updateUser,
+    deleteUser,
 };
