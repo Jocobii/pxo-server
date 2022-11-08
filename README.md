@@ -1,7 +1,7 @@
 
-# PXO APP
+# PXO SERVER
 
-Interfaz del sistema de PXO
+Server de PXO
 
 
 ![Logo](https://www.hondaoptima.com/static/dealer-20108/logo.png)
@@ -12,7 +12,7 @@ Interfaz del sistema de PXO
 Clone the project
 
 ```bash
-  git clone https://github.com/gpoptima/pxo-app
+  git clone https://github.com/gpoptima/pxo-server
 ```
 
 Go to the project directory

@@ -38,7 +38,7 @@ const validateSignUp = (req, res, next) => {
     const signInSchema = validator.compile({
         first_name: { type: 'string', min: 3, max: 30 },
         first_last_name: { type: 'string', min: 3, max: 30 },
-        email: { type: 'string', min: 3, max: 30 },
+        email: { type: 'string', min: 3, max: 100 },
         password: { type: 'string', min: 5, max: 255 },
     });
 
