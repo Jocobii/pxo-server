@@ -1,4 +1,4 @@
-const auth = require('../../services/auth/auth');
+const auth = require('../../services/auth');
 
 const signIn = async (req, res) => {
     const response = await auth.signIn(req, res);
@@ -22,8 +22,8 @@ const recoveryPassword = async (req, res) => {
     const { code } = req.body;
 
     const response = code
-        ? await auth.recoveryPasswordWithCode(req, res)
-        : await auth.recoveryPasswordWithoutCode(req, res);
+        ? await auth.resetPasswordWithCode(req, res)
+        : await auth.resetPasswordWithoutCode(req, res);
 
     if (response.error) {
         res.status(400).json(response);
@@ -33,7 +33,7 @@ const recoveryPassword = async (req, res) => {
 };
 
 const sendCodeRecovery = async (req, res) => {
-    const response = await auth.sendCodeRecovery(req, res);
+    const response = await auth.sendCode(req, res);
     if (response.error) {
         res.status(400).json(response);
         return;
