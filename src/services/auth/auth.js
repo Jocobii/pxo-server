@@ -35,10 +35,10 @@ const signIn = async (req) => {
 
     const userData = {
         id: user.id,
-        firstName: user.first_name,
-        middleName: user.middle_name,
-        firstLastName: user.first_last_name,
-        secondLastName: user.second_last_name,
+        first_name: user.first_name,
+        middle_name: user.middle_name,
+        first_last_name: user.first_last_name,
+        second_last_name: user.second_last_name,
         email: user.email,
         accessToken: token,
     };
@@ -125,10 +125,10 @@ const sendCodeRecovery = async (req) => {
 const signUp = async (req) => {
     try {
         const {
-            firstName,
-            middleName,
-            firstLastName,
-            secondLastName,
+            first_name,
+            middle_name,
+            first_last_name,
+            second_last_name,
             email,
             password,
         } = req.body;
@@ -140,10 +140,10 @@ const signUp = async (req) => {
         const encryptedPassword = await encryptPassword(password);
 
         const newUserObject = {
-            first_name: firstName,
-            middle_name: middleName,
-            first_last_name: firstLastName,
-            second_last_name: secondLastName,
+            first_name,
+            middle_name,
+            first_last_name,
+            second_last_name,
             email,
             password: encryptedPassword,
             created_at: dayjs().format('YYYY-MM-DD HH:mm:ss'),
@@ -153,9 +153,18 @@ const signUp = async (req) => {
 
         if (!newUser.id) return standardResponse(true, 'No se pudo crear el usuario');
 
+        const newUserCreated = {
+            id: newUser.id,
+            first_name: newUser.first_name,
+            middle_name: newUser.middle_name,
+            first_last_name: newUser.first_last_name,
+            second_last_name: newUser.second_last_name,
+            email: newUser.email,
+        };
+
         return {
             error: false,
-            data: {},
+            data: newUserCreated,
             message: 'User created successfully',
             info: {},
         };

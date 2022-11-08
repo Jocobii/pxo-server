@@ -5,30 +5,29 @@ const validator = new Validator();
 
 const userUpdateSchema = (req, res, next) => {
     const recoverySchema = validator.compile({
-        firstName: {
+        first_name: {
             type: 'string',
             min: 2,
             max: 30,
             label: 'Nombre',
             messages: { email: 'El nombre es obligatorio' },
         },
-        middleName: {
+        middle_name: {
             type: 'string',
             max: 30,
             label: 'Segundo Nombre',
             optional: true,
             nullable: true,
         },
-        firstLastName: {
+        first_last_name: {
             type: 'string',
             min: 2,
             max: 30,
             label: 'Apellido paterno',
             messages: { email: 'El Apellido paterno es obligatorio' },
         },
-        secondLastName: {
+        second_last_name: {
             type: 'string',
-            min: 2,
             max: 30,
             label: 'Apellido materno',
             messages: { email: 'El Apellido materno es obligatorio' },
