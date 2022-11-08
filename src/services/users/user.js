@@ -1,36 +1,51 @@
 const models = require('../../models/index');
 const { plainObject } = require('../../utils/helpers');
 const { standardResponse } = require('../utils/helpers');
+const { encryptPassword } = require('../auth/utils/encrypt');
 
-const getAllUsers = async () => models.User.findAll();
+const getAllUsers = async () => models.User.findAll({
+    attributes: ['id', 'first_name', 'middle_name', 'first_last_name', 'second_last_name', 'email'],
+    order: [['id', 'DESC']],
+});
 
 const updateUser = async (req) => {
     const {
-        id, firstName, middleName,
-        firstLastName, secondLastName, email,
+        id, first_name,
+        middle_name,
+        first_last_name,
+        second_last_name,
+        email,
+        password,
     } = req.body;
 
     const user = await models.User.findOne({ where: { id } });
 
     if (!user) return standardResponse(404, 'El usuario no fue encontrado');
 
-    const updatedUser = plainObject(await user.update({
-        first_name: firstName,
-        middle_name: middleName,
-        first_last_name: firstLastName,
-        second_last_name: secondLastName,
+    const userToUpdate = {
+        first_name,
+        middle_name,
+        first_last_name,
+        second_last_name,
         email,
-    }));
+    };
 
-    const userUpdated = {
+    if (password) {
+        userToUpdate.password = await encryptPassword(password);
+    }
+
+    const updatedUser = plainObject(await user.update(userToUpdate));
+
+    const userUpdeted = {
         id: updatedUser.id,
-        firstName: updatedUser.first_name,
-        middleName: updatedUser.middle_name,
-        firstLastName: updatedUser.first_last_name,
-        secondLastName: updatedUser.second_last_name,
+        first_name: updatedUser.first_name,
+        middle_name: updatedUser.middle_name,
+        first_last_name: updatedUser.first_last_name,
+        second_last_name: updatedUser.second_last_name,
         email: updatedUser.email,
     };
-    return standardResponse(false, 'El usuario fue actualizado', userUpdated);
+
+    return standardResponse(false, 'El usuario fue actualizado', userUpdeted);
 };
 
 module.exports = {

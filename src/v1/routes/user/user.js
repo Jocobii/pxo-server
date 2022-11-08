@@ -5,9 +5,9 @@ const user = require('../../../controllers/user');
 const { userUpdateSchema } = require('./middleware/user.schemas');
 
 router
-    .get('/', user.getAllUsers)
+    .get('/list', user.getAllUsers)
     .get('/:id', (req, res) => {
-        res.send('Get one workouts');
+        res.send('Get one workouts xddd');
     })
     .put('/', userUpdateSchema, user.updateUser);
 
