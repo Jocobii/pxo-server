@@ -1,32 +1,50 @@
 const models = require('../../models/index');
 const { standardResponse } = require('../utils/helpers');
-const { getLimitAndOffset, getOrderBySort } = require('../utils/sequelize');
+const { applyGeneralFilters } = require('../utils/sequelize');
 
 const getAllUsers = async (req) => {
-    const {
-        results, page, sortField, sortOrder,
-    } = req.query;
+    try {
+        const { page, sortField, sortOrder } = req.query;
+        const { where, pagination, order } = applyGeneralFilters(req.query);
 
-    const { limit, offset } = getLimitAndOffset(results, page);
-    const order = getOrderBySort(models, sortField, sortOrder);
+        const result = await models.User.findAndCountAll({
+            limit: pagination.limit,
+            offset: pagination.offset,
+            attributes: [
+                'id',
+                'first_name',
+                'middle_name',
+                'first_last_name',
+                'second_last_name',
+                'email',
+            ],
+            where,
+            order,
+        });
 
-    const result = await models.User.findAndCountAll({
-        limit,
-        offset,
-        attributes: ['id', 'first_name', 'middle_name', 'first_last_name', 'second_last_name', 'email'],
-        where: { isActive: true },
-        order,
-    });
+        const info = {
+            total: result.count,
+            results: pagination.limit,
+            page: page ? parseInt(page, 10) : 1,
+            sortField,
+            sortOrder,
+        };
 
-    const info = {
-        total: result.count,
-        results: limit,
-        page: page ? parseInt(page, 10) : 1,
-        sortField,
-        sortOrder,
-    };
-
-    return standardResponse(false, 200, 'Usuarios encontrados', result.rows, info);
+        return standardResponse(
+            false,
+            200,
+            'Usuarios encontrados',
+            result.rows,
+            info,
+        );
+    } catch (error) {
+        console.log(error);
+        return standardResponse(
+            true,
+            500,
+            'Ha ocurrido un error en el servdor',
+        );
+    }
 };
 
 module.exports = getAllUsers;

@@ -4,6 +4,7 @@ const resetPasswordWithCode = require('./resetPasswordWithCode');
 const resetPasswordWithoutCode = require('./resetPasswordWithoutCode');
 const sendCode = require('./sendCode');
 const logout = require('./logout');
+const refreshToken = require('./refreshToken');
 
 module.exports = {
     signUp,
@@ -12,4 +13,5 @@ module.exports = {
     resetPasswordWithoutCode,
     sendCode,
     logout,
+    refreshToken,
 };

@@ -50,10 +50,20 @@ const logout = async (req, res) => {
     res.json(response);
 };
 
+const refreshToken = async (req, res) => {
+    const response = await auth.refreshToken(req, res);
+    if (response.error) {
+        res.status(400).json(response);
+        return;
+    }
+    res.json(response);
+};
+
 module.exports = {
     signIn,
     signUp,
     recoveryPassword,
     sendCodeRecovery,
     logout,
+    refreshToken,
 };
