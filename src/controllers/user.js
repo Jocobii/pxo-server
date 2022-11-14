@@ -2,7 +2,7 @@ const userServices = require('../services/users');
 
 const getAllUsers = async (req, res) => {
     const users = await userServices.getAllUsers(req);
-    res.status(users.httpCode).json({ data: users });
+    res.status(users.httpCode).json(users);
 };
 
 const updateUser = async (req, res) => {

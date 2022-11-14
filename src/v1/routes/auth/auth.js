@@ -12,6 +12,7 @@ router
     .post('/sign-up', validateSignUp, auth.signUp)
     .post('/logout', auth.logout)
     .post('/recovery-password', auth.recoveryPassword)
-    .post('/send-code-recovery', auth.sendCodeRecovery);
+    .post('/send-code-recovery', auth.sendCodeRecovery)
+    .post('/refresh-token', auth.refreshToken);
 
 module.exports = router;

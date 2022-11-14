@@ -44,6 +44,12 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+// este proceso de sync solo debe ser en DESARROLLO, para produccion se deben usar las migraciones
+// para que se sincronice debe tener al final _test
+// ejemplo: pxo_test
+
+// if (process.env.NODE_ENV === 'development') sequelize.sync({ alter: true, match: /_test$/ });
+
 sequelize
     .authenticate()
     .then(() => {
