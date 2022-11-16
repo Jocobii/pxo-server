@@ -7,7 +7,12 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-        static associate() {}
+        static associate(model) {
+            User.belongsTo(model.agency, {
+                foreignKey: 'agency_id',
+                onDelete: 'RESTRICT',
+            });
+        }
     }
     User.init({
         id: {
@@ -41,10 +46,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        deleted_at: {
-            allowNull: true,
-            type: DataTypes.DATE,
-        },
         access_token: {
             allowNull: true,
             type: DataTypes.STRING,
@@ -52,6 +53,28 @@ module.exports = (sequelize, DataTypes) => {
         code_recovery: {
             allowNull: true,
             type: DataTypes.STRING(10),
+        },
+        agency_id: {
+            allowNull: false,
+            defaultValue: 1,
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'agency',
+                key: 'id',
+            },
+        },
+        created_at: {
+            allowNull: false,
+            type: DataTypes.DATE,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+        },
+        updated_at: {
+            allowNull: true,
+            type: DataTypes.DATE,
+        },
+        deleted_at: {
+            allowNull: true,
+            type: DataTypes.DATE,
         },
         isActive: {
             allowNull: false,

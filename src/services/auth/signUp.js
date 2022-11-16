@@ -1,4 +1,3 @@
-const dayjs = require('dayjs');
 const models = require('../../models');
 const { standardResponse } = require('../utils/helpers');
 const { encryptPassword } = require('./utils/encrypt');
@@ -13,6 +12,7 @@ const signUp = async (req) => {
             second_last_name,
             email,
             password,
+            agency_id,
         } = req.body;
 
         const user = await models.User.findOne({ where: { email } });
@@ -28,7 +28,7 @@ const signUp = async (req) => {
             second_last_name,
             email,
             password: encryptedPassword,
-            created_at: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+            agency_id,
         };
 
         const newUser = plainObject(await models.User.create(newUserObject));
