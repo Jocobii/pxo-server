@@ -1,6 +1,6 @@
 const customers = require('../../services/customers');
 
-const createUser = async (req, res) => {
+const createCustomer = async (req, res) => {
     const response = await customers.create(req, res);
     if (response.error) {
         res.status(400).json(response);
@@ -9,6 +9,16 @@ const createUser = async (req, res) => {
     res.json(response);
 };
 
+const getCustomers = async (req, res) => {
+    const response = await customers.read(req);
+    if (response.error) {
+        res.status(400).json(response);
+        return;
+    }
+    res.json(response);
+};
+
 module.exports = {
-    createUser,
+    createCustomer,
+    getCustomers,
 };
