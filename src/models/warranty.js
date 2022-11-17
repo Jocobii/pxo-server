@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
             },
             year: {
-                type: DataTypes.STRING(50),
+                type: DataTypes.CHAR(3),
                 allowNull: false,
             },
             distance: {
@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true,
                 type: DataTypes.DATE,
             },
-            isActive: {
+            is_active: {
                 allowNull: false,
                 type: DataTypes.BOOLEAN,
                 defaultValue: true,
