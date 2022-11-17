@@ -1,20 +1,21 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class city extends Model {
+    class customer extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
         static associate(model) {
-            city.belongsTo(model.state, {
-                foreignKey: 'state_id',
+            customer.hasMany(model.customer_address, {
+                foreignKey: 'customer_id',
                 onDelete: 'RESTRICT',
+                sourceKey: 'id',
             });
         }
     }
-    city.init(
+    customer.init(
         {
             id: {
                 allowNull: false,
@@ -23,16 +24,38 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
             },
             name: {
+                type: DataTypes.STRING(100),
+                allowNull: false,
+            },
+            middle_name: {
+                type: DataTypes.STRING(30),
+                allowNull: true,
+            },
+            first_last_name: {
+                type: DataTypes.STRING(30),
+                allowNull: true,
+            },
+            second_last_name: {
+                type: DataTypes.STRING(30),
+                allowNull: true,
+            },
+            rfc: {
                 type: DataTypes.STRING(30),
                 allowNull: false,
             },
-            state_id: {
-                type: DataTypes.INTEGER,
+            email: {
+                type: DataTypes.STRING(100),
                 allowNull: false,
-                references: {
-                    model: 'state',
-                    key: 'id',
-                },
+                unique: true,
+            },
+            is_company: {
+                type: DataTypes.TINYINT(1),
+                allowNull: false,
+                defaultValue: false,
+            },
+            date_incorporation_company: {
+                allowNull: true,
+                type: DataTypes.DATEONLY,
             },
             created_at: {
                 allowNull: false,
@@ -60,5 +83,5 @@ module.exports = (sequelize, DataTypes) => {
             sequelize,
         },
     );
-    return city;
+    return customer;
 };

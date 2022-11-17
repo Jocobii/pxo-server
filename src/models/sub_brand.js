@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'brand_id',
                 onDelete: 'RESTRICT',
             });
+            sub_brand.hasMany(models.warranty, { onDelete: 'RESTRICT' });
         }
     }
     sub_brand.init(
@@ -47,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true,
                 type: DataTypes.DATE,
             },
-            isActive: {
+            is_active: {
                 allowNull: false,
                 type: DataTypes.BOOLEAN,
                 defaultValue: true,

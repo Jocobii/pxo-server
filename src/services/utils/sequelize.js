@@ -38,7 +38,7 @@ const applyGeneralFilters = (query) => {
 
     const order = getOrderBySort(models, sortField, sortOrder);
     const { limit, offset } = getLimitAndOffset(results, page);
-    const where = { isActive: true };
+    const where = { is_active: true };
 
     if (fieldLike && searchLike) {
         where[fieldLike] = { [Op.like]: `%${searchLike}%` };

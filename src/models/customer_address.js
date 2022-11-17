@@ -1,20 +1,24 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class city extends Model {
+    class customer_address extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
-        static associate(model) {
-            city.belongsTo(model.state, {
-                foreignKey: 'state_id',
+        static associate(models) {
+            customer_address.belongsTo(models.customer, {
+                foreignKey: 'customer_id',
+                onDelete: 'RESTRICT',
+            });
+            customer_address.belongsTo(models.city, {
+                foreignKey: 'city_id',
                 onDelete: 'RESTRICT',
             });
         }
     }
-    city.init(
+    customer_address.init(
         {
             id: {
                 allowNull: false,
@@ -22,15 +26,39 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.INTEGER,
             },
-            name: {
-                type: DataTypes.STRING(30),
-                allowNull: false,
-            },
-            state_id: {
+            customer_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'state',
+                    model: 'customer',
+                    key: 'id',
+                },
+            },
+            street: {
+                type: DataTypes.STRING(100),
+                allowNull: false,
+            },
+            external_number: {
+                type: DataTypes.STRING(10),
+                allowNull: false,
+            },
+            inner_number: {
+                type: DataTypes.STRING(10),
+                allowNull: true,
+            },
+            district: {
+                type: DataTypes.STRING(50),
+                allowNull: false,
+            },
+            zip_code: {
+                type: DataTypes.STRING(10),
+                allowNull: false,
+            },
+            city_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'city',
                     key: 'id',
                 },
             },
@@ -60,5 +88,5 @@ module.exports = (sequelize, DataTypes) => {
             sequelize,
         },
     );
-    return city;
+    return customer_address;
 };

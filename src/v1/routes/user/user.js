@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const user = require('../../../controllers/user');
+const user = require('../../../controllers/users');
 const { userUpdateSchema } = require('./middleware/user.schemas');
 
 router
