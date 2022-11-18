@@ -5,7 +5,7 @@ const { applyGeneralFilters } = require('../utils/sequelize');
 const read = async (req) => {
     try {
         const {
-            page, sortField, sortOrder, email,
+            page, sortField, sortOrder,
         } = req.query;
 
         const { where, pagination, order } = applyGeneralFilters(req.query);
