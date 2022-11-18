@@ -1,21 +1,11 @@
-const dayjs = require('dayjs');
 const models = require('../../models');
+const createUserObject = require('./adapters/createUserObject');
 const { standardResponse } = require('../utils/helpers');
 const { plainObject } = require('../../utils/helpers');
 
 const createCustomer = async (req) => {
     try {
-        const {
-            name,
-            middle_name,
-            first_last_name,
-            second_last_name,
-            email,
-            rfc,
-            is_company,
-            date_incorporation_company,
-            customer_address,
-        } = req.body;
+        const { email, customer_address } = req.body;
 
         const user = await models.customer.findOne({ where: { email, is_active: true } });
 
@@ -27,18 +17,7 @@ const createCustomer = async (req) => {
             );
         }
 
-        const newCustomerObject = {
-            name,
-            middle_name,
-            first_last_name,
-            second_last_name,
-            email,
-            rfc,
-            is_company,
-            date_incorporation_company: dayjs(
-                date_incorporation_company,
-            ).format('YYYY-MM-DD'),
-        };
+        const newCustomerObject = createUserObject(req.body);
 
         const newCustomer = plainObject(
             await models.customer.create(newCustomerObject),

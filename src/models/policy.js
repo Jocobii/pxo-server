@@ -1,21 +1,15 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class sub_brand extends Model {
+    class policy extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
-        static associate(models) {
-            sub_brand.belongsTo(models.brand, {
-                foreignKey: 'brand_id',
-                onDelete: 'RESTRICT',
-            });
-            sub_brand.hasMany(models.warranty, { onDelete: 'RESTRICT' });
-        }
+        static associate() {}
     }
-    sub_brand.init(
+    policy.init(
         {
             id: {
                 allowNull: false,
@@ -23,17 +17,21 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.INTEGER,
             },
-            name: {
+            number_extension: {
                 type: DataTypes.STRING(50),
                 allowNull: false,
             },
-            brand_id: {
-                type: DataTypes.INTEGER,
+            date_issue: {
                 allowNull: false,
-                references: {
-                    model: 'brand',
-                    key: 'id',
-                },
+                type: DataTypes.DATEONLY,
+            },
+            beginning_effective_date: {
+                allowNull: false,
+                type: DataTypes.DATEONLY,
+            },
+            end_effective_date: {
+                allowNull: false,
+                type: DataTypes.DATEONLY,
             },
             created_at: {
                 allowNull: false,
@@ -61,5 +59,5 @@ module.exports = (sequelize, DataTypes) => {
             updatedAt: 'updated_at',
         },
     );
-    return sub_brand;
+    return policy;
 };

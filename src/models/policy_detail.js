@@ -1,24 +1,32 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class car extends Model {
+    class policy_detail extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
-        static associate(model) {
-            car.belongsTo(model.category, {
-                foreignKey: 'category_id',
+        static associate(models) {
+            policy_detail.belongsTo(models.policy, {
+                foreignKey: 'policy_id',
                 onDelete: 'RESTRICT',
             });
-            car.belongsTo(model.version, {
-                foreignKey: 'version_id',
+            policy_detail.belongsTo(models.car_dealer, {
+                foreignKey: 'car_dealer_id',
+                onDelete: 'RESTRICT',
+            });
+            policy_detail.belongsTo(models.car, {
+                foreignKey: 'car_id',
+                onDelete: 'RESTRICT',
+            });
+            policy_detail.belongsTo(models.customer, {
+                foreignKey: 'customer_id',
                 onDelete: 'RESTRICT',
             });
         }
     }
-    car.init(
+    policy_detail.init(
         {
             id: {
                 allowNull: false,
@@ -26,36 +34,27 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.INTEGER,
             },
-            year: {
-                type: DataTypes.DATEONLY,
-                allowNull: false,
-            },
-            mileage: {
-                type: DataTypes.CHAR(10),
-                allowNull: true,
-            },
-            series: {
-                type: DataTypes.STRING(30),
-                allowNull: true,
-            },
-            vin: {
-                type: DataTypes.STRING(30),
-                allowNull: true,
-                unique: true,
-            },
-            category_id: {
+            policy_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'category',
+                    model: 'policy',
                     key: 'id',
                 },
             },
-            version_id: {
+            car_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'version',
+                    model: 'car',
+                    key: 'id',
+                },
+            },
+            car_dealer_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'car_dealer',
                     key: 'id',
                 },
             },
@@ -93,5 +92,5 @@ module.exports = (sequelize, DataTypes) => {
             updatedAt: 'updated_at',
         },
     );
-    return car;
+    return policy_detail;
 };

@@ -73,10 +73,10 @@ module.exports = {
                 brand_id: 1,
             },
         ];
-        await queryInterface.bulkInsert('sub_brand', models, {});
+        await queryInterface.bulkInsert('category', models, {});
     },
 
     async down(queryInterface) {
-        await queryInterface.bulkDelete('sub_brand', null, {});
+        await queryInterface.bulkDelete('category', null, {});
     },
 };
