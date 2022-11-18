@@ -16,7 +16,6 @@ const getCustomerByEmail = async (email) => {
                 },
             ],
         });
-
         return standardResponse(
             false,
             200,

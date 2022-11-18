@@ -1,21 +1,21 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class sub_brand extends Model {
+    class category extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            sub_brand.belongsTo(models.brand, {
+            category.belongsTo(models.brand, {
                 foreignKey: 'brand_id',
                 onDelete: 'RESTRICT',
             });
-            sub_brand.hasMany(models.warranty, { onDelete: 'RESTRICT' });
+            category.hasMany(models.warranty, { onDelete: 'RESTRICT' });
         }
     }
-    sub_brand.init(
+    category.init(
         {
             id: {
                 allowNull: false,
@@ -61,5 +61,5 @@ module.exports = (sequelize, DataTypes) => {
             updatedAt: 'updated_at',
         },
     );
-    return sub_brand;
+    return category;
 };

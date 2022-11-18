@@ -5,7 +5,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 7650.0,
-        subBrandId: 2,
+        categoryId: 2,
     },
     {
         id: 2,
@@ -13,7 +13,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 8050.0,
-        subBrandId: 3,
+        categoryId: 3,
     },
     {
         id: 3,
@@ -21,7 +21,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 8050.0,
-        subBrandId: 4,
+        categoryId: 4,
     },
     {
         id: 4,
@@ -29,7 +29,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 8050.0,
-        subBrandId: 5,
+        categoryId: 5,
     },
     {
         id: 5,
@@ -37,7 +37,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 9400.0,
-        subBrandId: 6,
+        categoryId: 6,
     },
     {
         id: 6,
@@ -45,7 +45,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 9400.0,
-        subBrandId: 14,
+        categoryId: 14,
     },
     {
         id: 8,
@@ -53,7 +53,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 9400.0,
-        subBrandId: 7,
+        categoryId: 7,
     },
     {
         id: 9,
@@ -61,7 +61,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 9400.0,
-        subBrandId: 8,
+        categoryId: 8,
     },
     {
         id: 11,
@@ -69,7 +69,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 9400.0,
-        subBrandId: 9,
+        categoryId: 9,
     },
     {
         id: 12,
@@ -77,7 +77,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 9400.0,
-        subBrandId: 10,
+        categoryId: 10,
     },
     {
         id: 13,
@@ -85,7 +85,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 11100.0,
-        subBrandId: 11,
+        categoryId: 11,
     },
     {
         id: 14,
@@ -93,7 +93,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 11100.0,
-        subBrandId: 12,
+        categoryId: 12,
     },
     {
         id: 15,
@@ -101,7 +101,7 @@ const warrantiesPerYear = [
         year: '1',
         distance: '20,000',
         price: 11100.0,
-        subBrandId: 13,
+        categoryId: 13,
     },
 ];
 const warrantiesPerTwoYers = [
@@ -111,7 +111,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 10750.0,
-        subBrandId: 2,
+        categoryId: 2,
     },
     {
         id: 17,
@@ -119,7 +119,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 11250.0,
-        subBrandId: 3,
+        categoryId: 3,
     },
     {
         id: 18,
@@ -127,7 +127,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 11250.0,
-        subBrandId: 4,
+        categoryId: 4,
     },
     {
         id: 19,
@@ -135,7 +135,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 11250.0,
-        subBrandId: 5,
+        categoryId: 5,
     },
     {
         id: 20,
@@ -143,7 +143,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 13150.0,
-        subBrandId: 6,
+        categoryId: 6,
     },
     {
         id: 21,
@@ -151,7 +151,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 13150.0,
-        subBrandId: 14,
+        categoryId: 14,
     },
     {
         id: 22,
@@ -159,7 +159,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 13150.0,
-        subBrandId: 7,
+        categoryId: 7,
     },
     {
         id: 23,
@@ -167,7 +167,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 13150.0,
-        subBrandId: 8,
+        categoryId: 8,
     },
     {
         id: 24,
@@ -175,7 +175,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 13150.0,
-        subBrandId: 9,
+        categoryId: 9,
     },
     {
         id: 25,
@@ -183,7 +183,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 13150.0,
-        subBrandId: 10,
+        categoryId: 10,
     },
     {
         id: 26,
@@ -191,7 +191,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 15500.0,
-        subBrandId: 11,
+        categoryId: 11,
     },
     {
         id: 27,
@@ -199,7 +199,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 15500.0,
-        subBrandId: 12,
+        categoryId: 12,
     },
     {
         id: 28,
@@ -207,7 +207,7 @@ const warrantiesPerTwoYers = [
         year: '2',
         distance: '30,000',
         price: 15500.0,
-        subBrandId: 13,
+        categoryId: 13,
     },
 ];
 
@@ -218,7 +218,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 14150.0,
-        subBrandId: 2,
+        categoryId: 2,
     },
     {
         id: 30,
@@ -226,7 +226,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 14800.0,
-        subBrandId: 3,
+        categoryId: 3,
     },
     {
         id: 31,
@@ -234,7 +234,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 14800.0,
-        subBrandId: 4,
+        categoryId: 4,
     },
     {
         id: 32,
@@ -242,7 +242,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 14800.0,
-        subBrandId: 5,
+        categoryId: 5,
     },
     {
         id: 33,
@@ -250,7 +250,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 16700.0,
-        subBrandId: 6,
+        categoryId: 6,
     },
     {
         id: 34,
@@ -258,7 +258,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 16700.0,
-        subBrandId: 14,
+        categoryId: 14,
     },
     {
         id: 35,
@@ -266,7 +266,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 16700.0,
-        subBrandId: 7,
+        categoryId: 7,
     },
     {
         id: 36,
@@ -274,7 +274,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 16700.0,
-        subBrandId: 8,
+        categoryId: 8,
     },
     {
         id: 37,
@@ -282,7 +282,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 16700.0,
-        subBrandId: 9,
+        categoryId: 9,
     },
     {
         id: 38,
@@ -290,7 +290,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 16700.0,
-        subBrandId: 10,
+        categoryId: 10,
     },
     {
         id: 39,
@@ -298,7 +298,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 20500.0,
-        subBrandId: 11,
+        categoryId: 11,
     },
     {
         id: 40,
@@ -306,7 +306,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 20500.0,
-        subBrandId: 12,
+        categoryId: 12,
     },
     {
         id: 41,
@@ -314,7 +314,7 @@ const warrantiesPerThreeYers = [
         year: '3',
         distance: '65,000',
         price: 20500.0,
-        subBrandId: 13,
+        categoryId: 13,
     },
 ];
 

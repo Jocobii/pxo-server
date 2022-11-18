@@ -1,20 +1,20 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class model extends Model {
+    class version extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            model.belongsTo(models.sub_brand, {
+            version.belongsTo(models.category, {
                 foreignKey: 'sub_brand_id',
                 onDelete: 'RESTRICT',
             });
         }
     }
-    model.init(
+    version.init(
         {
             id: {
                 allowNull: false,
@@ -26,11 +26,11 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING(50),
                 allowNull: false,
             },
-            sub_brand_id: {
+            category_id: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 references: {
-                    model: 'sub_brand',
+                    model: 'category',
                     key: 'id',
                 },
             },
@@ -60,5 +60,5 @@ module.exports = (sequelize, DataTypes) => {
             updatedAt: 'updated_at',
         },
     );
-    return model;
+    return version;
 };

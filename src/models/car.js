@@ -8,8 +8,12 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(model) {
-            car.belongsTo(model.sub_brand, {
-                foreignKey: 'sub_brand_id',
+            car.belongsTo(model.category, {
+                foreignKey: 'category_id',
+                onDelete: 'RESTRICT',
+            });
+            car.belongsTo(model.version, {
+                foreignKey: 'version_id',
                 onDelete: 'RESTRICT',
             });
         }
@@ -23,8 +27,8 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
             },
             year: {
-                type: DataTypes.CHAR(4),
-                allowNull: true,
+                type: DataTypes.DATEONLY,
+                allowNull: false,
             },
             mileage: {
                 type: DataTypes.CHAR(10),
@@ -37,12 +41,29 @@ module.exports = (sequelize, DataTypes) => {
             vin: {
                 type: DataTypes.STRING(30),
                 allowNull: true,
+                unique: true,
             },
-            sub_brand_id: {
+            category_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'sub_brand',
+                    model: 'category',
+                    key: 'id',
+                },
+            },
+            version_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'version',
+                    key: 'id',
+                },
+            },
+            customer_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'customer',
                     key: 'id',
                 },
             },
