@@ -30,6 +30,18 @@ const getOrderBySort = (model, sortField, sortOrder) => {
     return order;
 };
 
+const searchExactlyByField = (fieldLike, value, query = {}) => {
+    const where = { ...query };
+    where[fieldLike] = { [Op.like]: `%${value}` };
+    return where;
+};
+
+const searchSimilarsByField = (fieldLike, value, query = {}) => {
+    const where = { ...query };
+    where[fieldLike] = { [Op.like]: `%${value}%` };
+    return where;
+};
+
 const applyGeneralFilters = (query) => {
     const {
         results, page, sortField, sortOrder,
@@ -38,11 +50,9 @@ const applyGeneralFilters = (query) => {
 
     const order = getOrderBySort(models, sortField, sortOrder);
     const { limit, offset } = getLimitAndOffset(results, page);
-    const where = { is_active: true };
+    let where = { is_active: true };
 
-    if (fieldLike && searchLike) {
-        where[fieldLike] = { [Op.like]: `%${searchLike}%` };
-    }
+    if (fieldLike && searchLike) where = { ...searchSimilarsByField(fieldLike, searchLike, where) };
 
     return {
         where,
@@ -50,8 +60,23 @@ const applyGeneralFilters = (query) => {
         order,
     };
 };
+
+const validateIfExistsByField = async (modelName, field, value) => {
+    let where = { is_active: true };
+    where = { ...searchExactlyByField(field, value, where) };
+
+    const findIt = await models[modelName].findOne({
+        attributes: ['id'],
+        where,
+    });
+    return !!findIt;
+};
+
 module.exports = {
     getLimitAndOffset,
     getOrderBySort,
     applyGeneralFilters,
+    searchExactlyByField,
+    searchSimilarsByField,
+    validateIfExistsByField,
 };

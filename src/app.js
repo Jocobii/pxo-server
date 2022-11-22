@@ -15,8 +15,8 @@ if (process.env.MORGAN === 'yes' && process.env.NODE_ENV === 'development') app.
 
 app.use(compression());
 app.use(helmet());
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: false }));
+app.use(express.json({ limit: '50mb', type: 'application/json' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(cors(corsOptions));
 app.use(jwt());

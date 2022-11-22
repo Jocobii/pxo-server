@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'city_id',
                 onDelete: 'RESTRICT',
             });
+            agency.hasMany(models.policy, {
+                foreignKey: 'agency_id',
+                onDelete: 'RESTRICT',
+            });
         }
     }
     agency.init(

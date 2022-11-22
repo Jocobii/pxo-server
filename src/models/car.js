@@ -34,10 +34,6 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.CHAR(10),
                 allowNull: true,
             },
-            series: {
-                type: DataTypes.STRING(30),
-                allowNull: true,
-            },
             vin: {
                 type: DataTypes.STRING(30),
                 allowNull: true,
