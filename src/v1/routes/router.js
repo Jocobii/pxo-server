@@ -8,5 +8,6 @@ router.use('/api/v1/customers', require('./customers'));
 router.use('/api/v1/policies', require('./policy'));
 router.use('/api/v1/car-categories', require('./categories'));
 router.use('/api/v1/validateByField', require('./validations'));
+router.use('/api/v1/products', require('./warranty'));
 
 module.exports = router;
