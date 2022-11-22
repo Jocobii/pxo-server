@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             version.belongsTo(models.category, {
-                foreignKey: 'sub_brand_id',
+                foreignKey: 'category_id',
                 onDelete: 'RESTRICT',
             });
         }

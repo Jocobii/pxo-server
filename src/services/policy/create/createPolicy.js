@@ -7,6 +7,7 @@ const createPolicy = async (body, cardId, customerId, t) => {
     const {
         number_extension, date_issue,
         beginning_effective_date, end_effective_date,
+        agency_id,
     } = body;
 
     const polizaObject = {
@@ -14,6 +15,7 @@ const createPolicy = async (body, cardId, customerId, t) => {
         date_issue,
         beginning_effective_date,
         end_effective_date,
+        agency_id,
     };
 
     const newPolicy = plainObject(await models.policy.create(polizaObject, { transaction: t }));

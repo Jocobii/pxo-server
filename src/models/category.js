@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'brand_id',
                 onDelete: 'RESTRICT',
             });
+            category.hasMany(models.version, { foreignKey: 'category_id', onDelete: 'RESTRICT' });
             category.hasMany(models.warranty, { onDelete: 'RESTRICT' });
         }
     }

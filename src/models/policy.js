@@ -7,7 +7,16 @@ module.exports = (sequelize, DataTypes) => {
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
-        static associate() {}
+        static associate(models) {
+            policy.hasOne(models.policy_detail, {
+                foreignKey: 'policy_id',
+                onDelete: 'RESTRICT',
+            });
+            policy.belongsTo(models.agency, {
+                foreignKey: 'agency_id',
+                onDelete: 'RESTRICT',
+            });
+        }
     }
     policy.init(
         {
@@ -20,6 +29,14 @@ module.exports = (sequelize, DataTypes) => {
             number_extension: {
                 type: DataTypes.STRING(50),
                 allowNull: false,
+            },
+            agency_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'agency',
+                    key: 'id',
+                },
             },
             date_issue: {
                 allowNull: false,

@@ -9,8 +9,17 @@ const createPolicy = async (req, res) => {
     res.json(response);
 };
 
-const getPolicy = async (req, res) => {
+const getPolicies = async (req, res) => {
     const response = await policy.read(req);
+    if (response.error) {
+        res.status(400).json(response);
+        return;
+    }
+    res.json(response);
+};
+
+const validateByField = async (req, res) => {
+    const response = await policy.validate(req);
     if (response.error) {
         res.status(400).json(response);
         return;
@@ -20,5 +29,6 @@ const getPolicy = async (req, res) => {
 
 module.exports = {
     createPolicy,
-    getPolicy,
+    getPolicies,
+    validateByField,
 };

@@ -13,7 +13,7 @@ const updateUser = async (req) => {
         password,
     } = req.body;
 
-    const user = await models.User.findOne({ where: { id, isActive: true } });
+    const user = await models.User.findOne({ where: { id, is_active: true } });
 
     if (!user) return standardResponse(true, 404, 'El usuario no fue encontrado');
 

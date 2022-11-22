@@ -2,29 +2,23 @@ const models = require('../../models/index');
 const { standardResponse } = require('../utils/helpers');
 const { applyGeneralFilters } = require('../utils/sequelize');
 
-const read = async (req) => {
+const getAllUsers = async (req) => {
     try {
         const {
             page, sortField, sortOrder,
         } = req.query;
-
         const { where, pagination, order } = applyGeneralFilters(req.query);
 
-        const result = await models.policy.findAndCountAll({
-            attributes: { exclude: ['deleted_at', 'is_active'] },
+        const result = await models.category.findAndCountAll({
             limit: pagination.limit,
+            attributes: { exclude: ['deleted_at', 'is_active', 'brand_id', 'created_at', 'updated_at'] },
             offset: pagination.offset,
             where,
             order,
             include: [
                 {
-                    model: models.policy_detail,
-                    attributes: { exclude: ['deleted_at', 'is_active', 'customer_id', 'car_id', 'car_dealer_id'] },
-                    include: [
-                        { model: models.customer, attributes: { exclude: ['deleted_at', 'is_active'] } },
-                        { model: models.car, attributes: { exclude: ['deleted_at', 'is_active'] } },
-                        { model: models.car_dealer, attributes: { exclude: ['deleted_at', 'is_active'] } },
-                    ],
+                    model: models.version,
+                    attributes: { exclude: ['category_id', 'deleted_at', 'is_active', 'created_at', 'updated_at'] },
                 },
             ],
         });
@@ -40,12 +34,11 @@ const read = async (req) => {
         return standardResponse(
             false,
             200,
-            'Polizas encontradas',
+            'Categorias encontradas',
             result.rows,
             info,
         );
     } catch (error) {
-        console.log(error);
         return standardResponse(
             true,
             500,
@@ -54,4 +47,4 @@ const read = async (req) => {
     }
 };
 
-module.exports = read;
+module.exports = getAllUsers;
