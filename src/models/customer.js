@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
             fullName: {
                 type: DataTypes.VIRTUAL,
                 get() {
-                    return `${this.name} ${this.middle_name || ''} ${this.first_last_name} ${this.second_last_name || ''}`;
+                    return `${this.name} ${this.middle_name || ''} ${this.first_last_name || ''} ${this.second_last_name || ''}`;
                 },
             },
             rfc: {

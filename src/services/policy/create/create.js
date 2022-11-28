@@ -33,8 +33,6 @@ const createPolicy = async (req) => {
             },
             raw: true,
         });
-        console.log(req.body);
-
         if (customerExists?.id) customer.id = customerExists.id;
 
         if (customer?.id || customerExists) {
