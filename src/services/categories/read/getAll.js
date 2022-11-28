@@ -1,8 +1,8 @@
-const models = require('../../models/index');
-const { standardResponse } = require('../utils/helpers');
-const { applyGeneralFilters } = require('../utils/sequelize');
+const models = require('../../../models/index');
+const { standardResponse } = require('../../utils/helpers');
+const { applyGeneralFilters } = require('../../utils/sequelize');
 
-const getAllUsers = async (req) => {
+const getAllCategories = async (req) => {
     try {
         const {
             page, sortField, sortOrder,
@@ -47,4 +47,4 @@ const getAllUsers = async (req) => {
     }
 };
 
-module.exports = getAllUsers;
+module.exports = getAllCategories;

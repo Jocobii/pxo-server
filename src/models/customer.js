@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING(30),
                 allowNull: true,
             },
+            cellPhone: {
+                type: DataTypes.STRING(15),
+                allowNull: true,
+            },
             first_last_name: {
                 type: DataTypes.STRING(30),
                 allowNull: true,
@@ -38,6 +42,12 @@ module.exports = (sequelize, DataTypes) => {
             second_last_name: {
                 type: DataTypes.STRING(30),
                 allowNull: true,
+            },
+            fullName: {
+                type: DataTypes.VIRTUAL,
+                get() {
+                    return `${this.name} ${this.middle_name || ''} ${this.first_last_name} ${this.second_last_name || ''}`;
+                },
             },
             rfc: {
                 type: DataTypes.STRING(30),

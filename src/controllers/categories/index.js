@@ -1,7 +1,9 @@
-const category = require('../../services/categories');
+const category = require('../../services/categories/read');
 
 const getCategories = async (req, res) => {
-    const response = await category.read(req);
+    const { categoryId } = req.query;
+    const response = categoryId
+        ? await category.getOneCategory(req) : await category.getAllCategories(req);
     if (response.error) {
         res.status(400).json(response);
         return;

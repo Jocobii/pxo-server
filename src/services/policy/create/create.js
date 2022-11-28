@@ -26,29 +26,47 @@ const createPolicy = async (req) => {
         }
 
         let newCustomerObject = null;
+        const customerExists = await models.customer.findOne({
+            where: {
+                email: customer.email,
+                is_active: true,
+            },
+            raw: true,
+        });
+        console.log(req.body);
 
-        if (customer?.id) {
-            newCustomerObject = plainObject(await models.customer.update(
+        if (customerExists?.id) customer.id = customerExists.id;
+
+        if (customer?.id || customerExists) {
+            await models.customer.update(
                 customer,
-                { where: { id: customer.id } },
+                { where: { id: customerExists.id } },
                 { transaction: t },
-            ));
+            );
 
             if (customer.customer_address.length > 0) {
                 const promises = customer.customer_address.map((address) => models.customer_address
                     .update(
                         address,
-                        { where: { customer_id: customer.id }, transaction: t },
+                        { where: { customer_id: customerExists.id }, transaction: t },
                     ));
-                const address = await Promise.all(promises);
-                newCustomerObject.customer_address = address;
+                await Promise.all(promises);
             }
+            newCustomerObject = {
+                ...customer,
+                customer_addresses: customer.customer_address,
+                id: customerExists.id,
+            };
         }
 
-        if (!customer?.id) {
+        if (!customer?.id && !customerExists) {
             // TODO: Create and validate with own schema (customer schema)
+            console.log(customer);
             const newCustomer = plainObject(await models
-                .customer.create(customer, { transaction: t }));
+                .customer.create({
+                    ...customer,
+                    is_company: customer.is_company === 'true',
+                }, { transaction: t }));
 
             const customerAddress = plainObject(await models.customer_address.bulkCreate(
                 customer.customer_address.map((address) => ({
@@ -60,7 +78,7 @@ const createPolicy = async (req) => {
 
             newCustomerObject = {
                 ...newCustomer,
-                customer_address: customerAddress,
+                customer_addresses: customerAddress,
             };
         }
 
@@ -77,8 +95,10 @@ const createPolicy = async (req) => {
 
         const data = {
             ...policyWithDetails,
-            car: newCar,
-            customer: newCustomerObject,
+            policy_detail: {
+                car: newCar,
+                customer: newCustomerObject,
+            },
         };
 
         await t.commit();
@@ -90,6 +110,7 @@ const createPolicy = async (req) => {
             data,
         );
     } catch (error) {
+        console.log(error);
         await t.rollback();
         return standardResponse(true, 500, error.message);
     }
