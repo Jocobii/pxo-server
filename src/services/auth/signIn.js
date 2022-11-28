@@ -24,6 +24,7 @@ const signIn = async (req) => {
         first_last_name: user.first_last_name,
         second_last_name: user.second_last_name,
         email: user.email,
+        agency_id: user.agency_id,
         accessToken: token,
     };
 

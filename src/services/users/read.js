@@ -38,7 +38,6 @@ const getAllUsers = async (req) => {
             info,
         );
     } catch (error) {
-        console.log(error);
         return standardResponse(
             true,
             500,

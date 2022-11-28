@@ -38,6 +38,30 @@ module.exports = (sequelize, DataTypes) => {
                     key: 'id',
                 },
             },
+            policy_type_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'policy_type',
+                    key: 'id',
+                },
+            },
+            bank_id: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                references: {
+                    model: 'bank',
+                    key: 'id',
+                },
+            },
+            warranty_id: {
+                type: DataTypes.INTEGER,
+                references: {
+                    model: 'warranty',
+                    key: 'id',
+                },
+                defaultValue: 1,
+            },
             date_issue: {
                 allowNull: false,
                 type: DataTypes.DATEONLY,

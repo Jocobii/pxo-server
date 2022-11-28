@@ -18,7 +18,6 @@ const validateByField = async (req) => {
         }
 
         const result = await validateIfExistsByField(modelName, fieldLike, searchLike);
-        console.log({ result });
 
         return standardResponse(
             false,
@@ -27,7 +26,6 @@ const validateByField = async (req) => {
             { exists: !!result },
         );
     } catch (error) {
-        console.log(error);
         return standardResponse(true, 500, error.message);
     }
 };
