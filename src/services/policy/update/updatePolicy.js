@@ -1,5 +1,4 @@
 const models = require('../../../models');
-const { GRUPO_OPTIMA_ID } = require('../../utils/constans/carDealers');
 
 const createPolicy = async (body, cardId, customerId, t) => {
     const {
@@ -25,7 +24,6 @@ const createPolicy = async (body, cardId, customerId, t) => {
     const policyDetail = {
         policy_id: id,
         car_id: cardId,
-        car_dealer_id: GRUPO_OPTIMA_ID,
         customer_id: customerId,
     };
 

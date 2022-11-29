@@ -35,7 +35,6 @@ const read = async (req) => {
                                     { model: models.version, attributes: ['name'] },
                                 ],
                             },
-                            { model: models.car_dealer, attributes: { exclude: ['deleted_at', 'is_active'] } },
                         ],
                     },
                 ],
@@ -67,11 +66,10 @@ const read = async (req) => {
             include: [
                 {
                     model: models.policy_detail,
-                    attributes: { exclude: ['deleted_at', 'is_active', 'customer_id', 'car_id', 'car_dealer_id'] },
+                    attributes: { exclude: ['deleted_at', 'is_active', 'customer_id', 'car_id'] },
                     include: [
                         { model: models.customer, attributes: { exclude: ['deleted_at', 'is_active'] } },
                         { model: models.car, attributes: { exclude: ['deleted_at', 'is_active'] } },
-                        { model: models.car_dealer, attributes: { exclude: ['deleted_at', 'is_active'] } },
                     ],
                 },
             ],

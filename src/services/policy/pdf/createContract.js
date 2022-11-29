@@ -14,7 +14,7 @@ const queryForGetPolicy = async (where) => models.policy.findOne({
     include: [
         {
             model: models.policy_detail,
-            attributes: { exclude: ['deleted_at', 'is_active', 'customer_id', 'car_id', 'car_dealer_id'] },
+            attributes: { exclude: ['deleted_at', 'is_active', 'customer_id', 'car_id'] },
             include: [
                 {
                     model: models.customer,
@@ -31,7 +31,6 @@ const queryForGetPolicy = async (where) => models.policy.findOne({
                         { model: models.version, attributes: ['name'] },
                     ],
                 },
-                { model: models.car_dealer, attributes: { exclude: ['deleted_at', 'is_active'] } },
             ],
         },
     ],
