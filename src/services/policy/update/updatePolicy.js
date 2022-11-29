@@ -1,11 +1,11 @@
 const models = require('../../../models');
 
-const createPolicy = async (body, cardId, customerId, t) => {
+const updatePolicy = async (body, cardId, customerId, t) => {
     const {
         id,
         number_extension, date_issue,
         beginning_effective_date, end_effective_date,
-        agency_id, policy_type_id, bank_id,
+        agency_id, policy_type_id, bank_id, warranty_id,
     } = body;
 
     const polizaObject = {
@@ -17,6 +17,7 @@ const createPolicy = async (body, cardId, customerId, t) => {
         agency_id,
         policy_type_id,
         bank_id,
+        warranty_id,
     };
 
     await models.policy.update(polizaObject, { where: { id }, transaction: t });
@@ -30,4 +31,4 @@ const createPolicy = async (body, cardId, customerId, t) => {
     await models.policy_detail.update(policyDetail, { where: { policy_id: id }, transaction: t });
 };
 
-module.exports = createPolicy;
+module.exports = updatePolicy;

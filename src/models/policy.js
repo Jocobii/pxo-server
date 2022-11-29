@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'agency_id',
                 onDelete: 'RESTRICT',
             });
+            policy.hasOne(models.warranty, {
+                foreignKey: 'id',
+                onDelete: 'RESTRICT',
+            });
         }
     }
     policy.init(
@@ -60,7 +64,6 @@ module.exports = (sequelize, DataTypes) => {
                     model: 'warranty',
                     key: 'id',
                 },
-                defaultValue: 1,
             },
             date_issue: {
                 allowNull: false,

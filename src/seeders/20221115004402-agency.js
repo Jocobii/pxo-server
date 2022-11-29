@@ -4,19 +4,19 @@ module.exports = {
         const agencies = [
             {
                 id: 1,
-                name: 'Honda Tijuana',
+                name: 'OPTIMA AUTOMOTRIZ, S.A. DE C.V. (OPTIMA)',
                 code: '10044',
                 city_id: 1,
             },
             {
                 id: 2,
-                name: 'Honda Mexicali',
+                name: 'OPTIMA AUTOMOTRIZ, S.A. DE C.V. (OPTIMA)',
                 code: '10063',
                 city_id: 2,
             },
             {
                 id: 3,
-                name: 'Honda Ensenada',
+                name: 'OPTIMA AUTOMOTRIZ, S.A. DE C.V. (OPTIMA)',
                 code: '10160',
                 city_id: 3,
             },

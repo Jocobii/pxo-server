@@ -2,16 +2,27 @@ require('dotenv').config();
 const puppeteer = require('puppeteer');
 const hbs = require('handlebars');
 const path = require('path');
+const Handlebars = require('handlebars');
 const fs = require('fs-extra');
 const models = require('../../../models/index');
 const { standardResponse } = require('../../utils/helpers');
 const { applyGeneralFilters } = require('../../utils/sequelize');
 const { plainObject } = require('../../../utils/helpers');
 
+Handlebars.registerHelper('getYear', (year) => year.substring(0, 4));
+
 const queryForGetPolicy = async (where) => models.policy.findOne({
     attributes: { exclude: ['deleted_at', 'is_active'] },
     where,
     include: [
+        {
+            model: models.agency,
+            attributes: ['name', 'code'],
+        },
+        {
+            model: models.warranty,
+            attributes: ['price'],
+        },
         {
             model: models.policy_detail,
             attributes: { exclude: ['deleted_at', 'is_active', 'customer_id', 'car_id'] },
