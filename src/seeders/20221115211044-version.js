@@ -1,106 +1,110 @@
 /** @type {import('sequelize-cli').Migration} */
+const {
+    CITY, CIVIC, ACCORD, INSIGHT, BR_V, CR_V, PILOT, ODYSSEY, HR_V,
+} = require('../utils/categories');
+
 module.exports = {
     async up(queryInterface) {
         const models = [
             {
                 id: 1,
                 name: 'UNIQ MT',
-                category_id: 2,
+                category_id: CITY,
             },
             {
                 id: 2,
-                name: 'SPORT CVT',
-                category_id: 2,
+                name: 'SPORT',
+                category_id: CITY,
             },
             {
                 id: 3,
-                name: 'PRIME CVT',
-                category_id: 2,
+                name: 'PRIME',
+                category_id: CITY,
             },
             {
                 id: 4,
-                name: 'TOURING CVT',
-                category_id: 2,
+                name: 'TOURING',
+                category_id: CITY,
             },
             {
                 id: 5,
                 name: 'I-STYLE',
-                category_id: 3,
+                category_id: CIVIC,
             },
             {
                 id: 6,
                 name: 'SPORT',
-                category_id: 3,
+                category_id: CIVIC,
             },
             {
                 id: 7,
                 name: 'TOURING',
-                category_id: 3,
+                category_id: CIVIC,
             },
             {
                 id: 8,
-                name: '2022',
-                category_id: 13,
+                name: 'TOURING',
+                category_id: ACCORD,
             },
             {
                 id: 9,
-                name: 'SPORT PLUS',
-                category_id: 6,
-            },
-            {
-                id: 21,
-                name: 'TOURING',
-                category_id: 6,
+                name: 'HIBRIDO L4',
+                category_id: INSIGHT,
             },
             {
                 id: 10,
                 name: 'UNIQ',
-                category_id: 5,
+                category_id: BR_V,
+            },
+            {
+                id: 11,
+                name: 'PRIME',
+                category_id: BR_V,
             },
             {
                 id: 12,
-                name: 'PRIME',
-                category_id: 5,
+                name: 'TURBO',
+                category_id: CR_V,
             },
             {
                 id: 13,
-                name: 'UNIQ CVT',
-                category_id: 4,
+                name: 'TURBO PLUS',
+                category_id: CR_V,
             },
             {
                 id: 14,
-                name: 'SPORT',
-                category_id: 4,
+                name: 'TOURING',
+                category_id: CR_V,
             },
             {
                 id: 15,
                 name: 'TOURING',
-                category_id: 4,
+                category_id: PILOT,
             },
             {
                 id: 16,
-                name: 'TURBO',
-                category_id: 14,
+                name: 'TOURING',
+                category_id: ODYSSEY,
             },
             {
                 id: 17,
-                name: 'TURBO PLUS',
-                category_id: 14,
+                name: 'BLACK EDITION',
+                category_id: ODYSSEY,
             },
             {
                 id: 18,
-                name: 'TOURING',
-                category_id: 14,
+                name: 'UNIQ',
+                category_id: HR_V,
             },
             {
                 id: 19,
-                name: 'TOURING',
-                category_id: 7,
+                name: 'SPORT',
+                category_id: HR_V,
             },
             {
                 id: 20,
                 name: 'TOURING',
-                category_id: 11,
+                category_id: HR_V,
             },
         ];
         await queryInterface.bulkInsert('version', models, {});

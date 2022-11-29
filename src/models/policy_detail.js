@@ -12,10 +12,6 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'policy_id',
                 onDelete: 'RESTRICT',
             });
-            policy_detail.belongsTo(models.car_dealer, {
-                foreignKey: 'car_dealer_id',
-                onDelete: 'RESTRICT',
-            });
             policy_detail.belongsTo(models.car, {
                 foreignKey: 'car_id',
                 onDelete: 'RESTRICT',
@@ -47,14 +43,6 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 references: {
                     model: 'car',
-                    key: 'id',
-                },
-            },
-            car_dealer_id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'car_dealer',
                     key: 'id',
                 },
             },

@@ -21,12 +21,12 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING(50),
                 allowNull: false,
             },
-            year: {
+            months: {
                 type: DataTypes.CHAR(3),
                 allowNull: false,
             },
             distance: {
-                type: DataTypes.STRING(10),
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
             price: {

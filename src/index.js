@@ -11,11 +11,13 @@ const { errorHandler, notFound, jwtErrorHandler } = require('./middlewares/error
 const corsOptions = require('./middlewares/cors');
 const jwt = require('./middlewares/jwt');
 
-const PORT = process.env.PORT || 5000;
 const app = express();
+const PORT = process.env.PORT || 5000;
+
+initDayjs();
+app.use(express.static(path.join(__dirname, 'public')));
 
 if (process.env.MORGAN === 'yes' && process.env.NODE_ENV === 'development') app.use(morgan('dev'));
-initDayjs();
 app.use(compression());
 app.use(helmet());
 app.use(express.json({ limit: '50mb', type: 'application/json' }));
@@ -24,7 +26,6 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
-
 app.use(cors(corsOptions));
 app.use(jwt());
 app.use('/', require('./v1/routes/router'));
@@ -32,7 +33,6 @@ app.use('/', require('./v1/routes/router'));
 app.use(notFound);
 app.use(errorHandler);
 app.use(jwtErrorHandler);
-
 app.listen(PORT, () => {
     console.log(`🤓 Server listening on port ${PORT}...`);
 });
