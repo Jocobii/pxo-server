@@ -7,6 +7,6 @@ router
     .post('/', policy.createPolicy)
     .put('/', policy.updatePolicy)
     .get('/', policy.getPolicies)
-    .get('/validate', policy.validateByField);
-
+    .get('/validate', policy.validateByField)
+    .get('/pdf/contract', policy.getContractPdf);
 module.exports = router;

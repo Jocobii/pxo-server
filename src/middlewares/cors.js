@@ -1,4 +1,6 @@
-const whitelist = ['http://localhost:3000', 'http://example2.com'];
+require('dotenv').config();
+
+const whitelist = [process.env.BASE_URL, 'http://example2.com'];
 
 const corsOptions = {
     origin(origin, callback) {
