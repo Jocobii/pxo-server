@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+const { engine } = require('express-handlebars');
 const compression = require('compression');
 const morgan = require('morgan');
+const path = require('path');
 const helmet = require('helmet');
 const initDayjs = require('./config/dayjs');
 require('./models');
@@ -18,6 +20,10 @@ app.use(compression());
 app.use(helmet());
 app.use(express.json({ limit: '50mb', type: 'application/json' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(cors(corsOptions));
 app.use(jwt());

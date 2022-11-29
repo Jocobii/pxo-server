@@ -1,0 +1,118 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <!-- Caratula info contract.handlebars -->
+                <div class="row">
+                    <div class="col"><h5>Numero Extensión Garantía:</h5></div>
+                    <div class="col bg-light">{{ number_extension }}</div>
+                    <div class="col"><h5>Fecha emision:</h5></div>
+                    <div class="col bg-light">{{ date_issue }}</div>
+                </div>
+                <div class="row">
+                    <div class="col"><h5>Inicio de Vigencia:</h5></div>
+                    <div class="col bg-light">{{ beginning_effective_date }}</div>
+                    <div class="col"><h5>Fin de Vigencia:</h5></div>
+                    <div class="col bg-light">{{ end_effective_date }}</div>
+                </div>
+                <div class="d-flex flex-row-reverse">
+                    <p>*Lo que suceda primero</p>
+                </div>
+                <div class="row">
+                    <div class="col col-3"><h5>Descripción del Vehículo:</h5></div>
+                    <div class="col col-9 bg-light">
+                        <div class="d-flex">
+                            <div class="p-2">
+                                Marca y Tipo: HONDA
+                                {{ policy_detail.car.category.name }} {{ policy_detail.car.version.name }}
+                            </div>
+                            <div class="p-2">Modelo: {{policy_detail.car.year}}</div>
+                            <div class="p-2">Número VIN: {{policy_detail.car.vin}}</div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col col-3"></div>
+                    <div class="col col-9 bg-light">
+                        <div class="d-flex">
+                            <div class="p-2">Fecha venta vehículo como:</div>
+                            <div class="p-2">{{ date_issue }}</div>
+                            <div class="p-2">Kilometraje</div>
+                            <div class="p-2"> {{policy_detail.car.mileage}} KM</div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col col-3"></div>
+                    <div class="col col-9 bg-light">
+                        <div class="d-flex">
+                            <div class="p-2">
+                                Nombre ó Denominación y Representante / RFC:
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="p-2">
+                                <h2>{{ policy_detail.customer.fullName}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col col-3"></div>
+                    <div class="col col-9 bg-light">
+                        <div class="d-flex">
+                            <div class="p-2">Domicilio</div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="p-2">
+                                <h3>
+                                    {{#each policy_detail.customer.customer_addresses}}
+                                        {{ this.street }}
+                                        {{ this.external_number }}
+                                        {{ this.inner_number }}
+                                        {{ this.district }}
+                                        {{ this.zip_code }}
+                                    {{/each}}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col col-3"></div>
+                    <div class="col col-9 bg-light">
+                        <div class="d-flex">
+                            <div class="p-2">Protección Amecah S.A. de C.V. (PAM110216-Q38) atraves de: Servicios
+                                Ordas S.A. de C.V. (SOR070511-UW1) y/o el Concesionario Y/O
+                                SANTANDER CONSUMO, S.A. DE C.V. SOFOM E.R., GRUPO FINANCIERO</div>
+                            <div class="p-2"><h3>$16,699.97 MXN</h3></div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col col-3"><h5>Concesionario:</h5></div>
+                    <div class="col col-9 bg-light">
+                        <h4>{{ policy_detail.car_dealer.name }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
