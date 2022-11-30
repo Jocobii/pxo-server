@@ -23,8 +23,8 @@ const read = async (req) => {
 
         const isGoldWarranty = couldBeGoldWarranty(dateIssue, mileage);
 
-        if (!isGoldWarranty) where.name = { [Op.notLike]: '%Garantia 3' };
-        if (categoryId) where.categoryId = categoryId;
+        if (!isGoldWarranty) where.name = { [Op.notLike]: '%PREMIUM' };
+        if (categoryId) where.categoryId = Number(categoryId);
 
         const result = await models.warranty.findAndCountAll({
             attributes: { exclude: ['deleted_at', 'is_active'] },
@@ -49,6 +49,7 @@ const read = async (req) => {
             info,
         );
     } catch (error) {
+        console.log(error);
         return standardResponse(
             true,
             500,
