@@ -9,5 +9,6 @@ router.use('/api/v1/policies', require('./policy'));
 router.use('/api/v1/car-categories', require('./categories'));
 router.use('/api/v1/validateByField', require('./validations'));
 router.use('/api/v1/products', require('./warranty'));
+router.use('/api/v1/catalogs', require('./catalog'));
 
 module.exports = router;

@@ -2,15 +2,13 @@ const models = require('../../../models');
 
 const updatePolicy = async (body, cardId, customerId, t) => {
     const {
-        id,
-        number_extension, date_issue,
+        id, date_issue,
         beginning_effective_date, end_effective_date,
         agency_id, policy_type_id, bank_id, warranty_id,
     } = body;
 
     const polizaObject = {
         id,
-        number_extension,
         date_issue,
         beginning_effective_date,
         end_effective_date,

@@ -5,47 +5,47 @@ module.exports = {
         const banks = [
             {
                 id: 1,
-                brand: 'AFIRME',
+                name: 'AFIRME',
             },
             {
                 id: 2,
-                brand: 'BANAMEX',
+                name: 'BANAMEX',
             },
             {
                 id: 3,
-                brand: 'BANBAJIO',
+                name: 'BANBAJIO',
             },
             {
                 id: 4,
-                brand: 'BANORTE',
+                name: 'BANORTE',
             },
             {
                 id: 5,
-                brand: 'BANREGIO',
+                name: 'BANREGIO',
             },
             {
                 id: 6,
-                brand: 'BBVA',
+                name: 'BBVA',
             },
             {
                 id: 7,
-                brand: 'BNP',
+                name: 'BNP',
             },
             {
                 id: 8,
-                brand: 'CETELEM',
+                name: 'CETELEM',
             },
             {
                 id: 9,
-                brand: 'INBURSA',
+                name: 'INBURSA',
             },
             {
                 id: 10,
-                brand: 'SANTANDER',
+                name: 'SANTANDER',
             },
             {
                 id: 11,
-                brand: 'SCOTIABANK',
+                name: 'SCOTIABANK',
             },
         ];
         await queryInterface.bulkInsert('bank', banks, {});

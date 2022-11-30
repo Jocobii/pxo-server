@@ -5,19 +5,19 @@ module.exports = {
             {
                 id: 1,
                 name: 'OPTIMA AUTOMOTRIZ, S.A. DE C.V. (OPTIMA)',
-                code: '10044',
+                code: '10044', // TIJUANA
                 city_id: 1,
             },
             {
                 id: 2,
                 name: 'OPTIMA AUTOMOTRIZ, S.A. DE C.V. (OPTIMA)',
-                code: '10063',
+                code: '10063', // MEXICALI
                 city_id: 2,
             },
             {
                 id: 3,
                 name: 'OPTIMA AUTOMOTRIZ, S.A. DE C.V. (OPTIMA)',
-                code: '10160',
+                code: '10160', // ENSENADA
                 city_id: 3,
             },
         ];

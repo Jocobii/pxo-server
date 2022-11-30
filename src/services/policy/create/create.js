@@ -6,24 +6,8 @@ const createPolicyWithDetails = require('./createPolicy');
 
 const createPolicy = async (req) => {
     const t = await models.sequelize.transaction();
-
     try {
-        const { number_extension, car, customer } = req.body;
-
-        const policyExists = await models.policy.findOne({
-            where: {
-                number_extension,
-                is_active: true,
-            },
-        });
-
-        if (policyExists) {
-            return standardResponse(
-                true,
-                404,
-                'La poliza ya existe en la base de datos',
-            );
-        }
+        const { car, customer } = req.body;
 
         let newCustomerObject = null;
         const customerExists = await models.customer.findOne({
@@ -59,7 +43,6 @@ const createPolicy = async (req) => {
 
         if (!customer?.id && !customerExists) {
             // TODO: Create and validate with own schema (customer schema)
-            console.log(customer);
             const newCustomer = plainObject(await models
                 .customer.create({
                     ...customer,
@@ -99,6 +82,7 @@ const createPolicy = async (req) => {
             },
         };
 
+        console.log('creand el business');
         await t.commit();
 
         return standardResponse(
