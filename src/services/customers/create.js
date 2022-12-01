@@ -5,7 +5,7 @@ const { plainObject } = require('../../utils/helpers');
 
 const createCustomer = async (req) => {
     try {
-        const { email, customer_address } = req.body;
+        const { email, customer_addresses } = req.body;
 
         const user = await models.customer.findOne({ where: { email, is_active: true } });
 
@@ -26,7 +26,7 @@ const createCustomer = async (req) => {
         if (!newCustomer.id) return standardResponse(true, 422, 'No se pudo crear el cliente');
 
         const customerAddress = plainObject(await models.customer_address.bulkCreate(
-            customer_address.map((address) => ({
+            customer_addresses.map((address) => ({
                 ...address,
                 customer_id: newCustomer.id,
             })),
@@ -34,7 +34,7 @@ const createCustomer = async (req) => {
 
         const customer = {
             ...newCustomer,
-            customer_address: customerAddress,
+            customer_addresses: customerAddress,
         };
 
         return standardResponse(

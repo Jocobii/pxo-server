@@ -61,9 +61,11 @@ const applyGeneralFilters = (query) => {
     };
 };
 
-const validateIfExistsByField = async (modelName, field, value) => {
+const validateIfExistsByField = async (modelName, field, value, id) => {
     let where = { is_active: true };
     where = { ...searchExactlyByField(field, value, where) };
+
+    if (id) where = { ...where, id: { [Op.not]: id } };
 
     const findIt = await models[modelName].findOne({
         attributes: ['id'],

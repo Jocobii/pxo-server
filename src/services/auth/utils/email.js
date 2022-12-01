@@ -14,7 +14,7 @@ const createTransporter = () => nodemailer.createTransport({
 });
 
 /**
- * Functino to send email
+ * Function to send email
  * @param {object} template - Template to send email
  * @returns boolean
  */

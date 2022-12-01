@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const models = require('../../../models/index');
 const { standardResponse } = require('../../utils/helpers');
 const { applyGeneralFilters } = require('../../utils/sequelize');
@@ -6,10 +7,23 @@ const read = async (req) => {
     try {
         const {
             page, sortField, sortOrder, simple, agency_id,
+            vin, email,
         } = req.query;
 
         const { where, pagination, order } = applyGeneralFilters(req.query);
         where.agency_id = agency_id;
+
+        if (vin) {
+            where['$policy_detail->car.vin$'] = {
+                [Op.like]: `%${vin}%`,
+            };
+        }
+
+        if (email) {
+            where['$policy_detail->customer.email$'] = {
+                [Op.like]: `%${email}%`,
+            };
+        }
 
         if (simple) {
             const result = await models.policy.findAndCountAll({
@@ -69,7 +83,14 @@ const read = async (req) => {
                     attributes: { exclude: ['deleted_at', 'is_active', 'customer_id', 'car_id'] },
                     include: [
                         { model: models.customer, attributes: { exclude: ['deleted_at', 'is_active'] } },
-                        { model: models.car, attributes: { exclude: ['deleted_at', 'is_active'] } },
+                        {
+                            model: models.car,
+                            attributes: { exclude: ['deleted_at', 'is_active'] },
+                            include: [
+                                { model: models.category, attributes: ['name'] },
+                                { model: models.version, attributes: ['name'] },
+                            ],
+                        },
                     ],
                 },
             ],
