@@ -1,7 +1,11 @@
 const create = require('./create');
-const read = require('./read');
+const getAll = require('./read/getAll');
+const getOne = require('./read/getOne');
+const update = require('./update');
 
 module.exports = {
     create,
-    read,
+    getAll,
+    getOne,
+    update,
 };

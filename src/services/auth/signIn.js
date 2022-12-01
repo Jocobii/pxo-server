@@ -28,7 +28,7 @@ const signIn = async (req) => {
         accessToken: token,
     };
 
-    return standardResponse(false, 200, 'Inicion de sesion', userData);
+    return standardResponse(false, 200, 'Bienvenido a PXO', userData);
 };
 
 module.exports = signIn;

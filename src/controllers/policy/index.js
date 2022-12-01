@@ -46,13 +46,6 @@ const getContractPdf = async (req, res) => {
         return;
     }
     res.json(response);
-    // res.send('pdf');
-    // const response = await policy.createContractPDF(req);
-    // if (response.error) {
-    //     res.status(400).json(response);
-    //     return;
-    // }
-    // res.json(response);
 };
 
 module.exports = {

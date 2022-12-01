@@ -7,6 +7,7 @@ const validateByField = async (req) => {
             fieldLike,
             searchLike,
             modelName,
+            id,
         } = req.query;
 
         if (!fieldLike || !searchLike) {
@@ -17,12 +18,12 @@ const validateByField = async (req) => {
             );
         }
 
-        const result = await validateIfExistsByField(modelName, fieldLike, searchLike);
+        const result = await validateIfExistsByField(modelName, fieldLike, searchLike, id);
 
         return standardResponse(
-            false,
+            !!result,
             200,
-            result ? 'Se encontro un registro' : 'No se encontro un registro',
+            result ? 'Ya existe un registro' : 'No se encontro un registro',
             { exists: !!result },
         );
     } catch (error) {

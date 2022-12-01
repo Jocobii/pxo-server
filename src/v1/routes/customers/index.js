@@ -6,6 +6,6 @@ const { customerCreateSchema } = require('./middleware/customers.schema');
 
 router
     .post('/', customerCreateSchema, customer.createCustomer)
-    .get('/', customer.getCustomers);
-
+    .get('/', customer.getCustomers)
+    .put('/', customer.updateCustomer);
 module.exports = router;

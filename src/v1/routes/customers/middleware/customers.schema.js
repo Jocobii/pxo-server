@@ -5,8 +5,7 @@ const validator = new Validator();
 
 const customerCreateSchema = (req, res, next) => {
     const { is_company, date_incorporation_company } = req.body;
-    const rawData = { ...req.body };
-
+    const rawData = { ...req.body, is_company: is_company === 'true' ? 1 : 0 };
     const schemaCustomer = {
         name: {
             type: 'string',
@@ -26,8 +25,8 @@ const customerCreateSchema = (req, res, next) => {
             type: 'string',
             max: 30,
             label: 'Apellido paterno',
-            optional: is_company === true,
-            nullable: is_company === true,
+            optional: is_company === 'true',
+            nullable: is_company === 'true',
         },
         second_last_name: {
             type: 'string',
@@ -48,10 +47,11 @@ const customerCreateSchema = (req, res, next) => {
             max: 30,
             label: 'RFC',
         },
-        is_company: {
-            type: 'boolean',
-        },
-        customer_address: {
+        is_company: [
+            { type: 'boolean' },
+            { type: 'number' },
+        ],
+        customer_addresses: {
             type: 'array',
             items: {
                 type: 'object',
@@ -78,15 +78,15 @@ const customerCreateSchema = (req, res, next) => {
                         type: 'string',
                         max: 10,
                     },
-                    city_id: {
-                        type: 'number',
-                    },
+                    city_id: [
+                        { type: 'string' },
+                        { type: 'number' },
+                    ],
                 },
             },
         },
     };
-
-    if (is_company) {
+    if (is_company === 'true') {
         schemaCustomer.date_incorporation_company = { type: 'date' };
         rawData.date_incorporation_company = new Date(date_incorporation_company);
     }
