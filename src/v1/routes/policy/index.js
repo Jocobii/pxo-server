@@ -6,6 +6,7 @@ const policy = require('../../../controllers/policy');
 router
     .post('/', policy.createPolicy)
     .put('/', policy.updatePolicy)
+    .delete('/', policy.deletePolicy)
     .get('/', policy.getPolicies)
     .get('/validate', policy.validateByField)
     .get('/pdf/contract', policy.getContractPdf);

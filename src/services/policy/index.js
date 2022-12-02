@@ -4,6 +4,7 @@ const getAll = require('./read/getAll');
 const { getOne } = require('./read/getOne');
 const validate = require('./validations/validateNumber');
 const { createContract } = require('./pdf');
+const deletePolicy = require('./delete');
 
 module.exports = {
     create,
@@ -12,4 +13,5 @@ module.exports = {
     getOne,
     validate,
     createContract,
+    deletePolicy,
 };

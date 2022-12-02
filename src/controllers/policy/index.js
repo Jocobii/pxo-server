@@ -18,6 +18,15 @@ const updatePolicy = async (req, res) => {
     res.json(response);
 };
 
+const deletePolicy = async (req, res) => {
+    const response = await policy.deletePolicy(req, res);
+    if (response.error) {
+        res.status(400).json(response);
+        return;
+    }
+    res.json(response);
+};
+
 const getPolicies = async (req, res) => {
     const { id } = req.query;
 
@@ -54,4 +63,5 @@ module.exports = {
     updatePolicy,
     validateByField,
     getContractPdf,
+    deletePolicy,
 };
