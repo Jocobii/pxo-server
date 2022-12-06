@@ -19,8 +19,13 @@ const getAnyCatalog = async (req) => {
             offset: pagination.offset,
             where,
             order,
+            distinct: true,
             include: includeFirstLevel.length > 0 ? includeFirstLevel.map((model) => (
-                { model: models[model], attributes: { exclude: excludeDefaultFields } }
+                {
+                    model: models[model],
+                    where: { is_active: true },
+                    attributes: { exclude: excludeDefaultFields },
+                }
             )) : null,
         });
 

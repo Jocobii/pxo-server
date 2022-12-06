@@ -5,20 +5,34 @@ const { standardResponse } = require('../../utils/helpers');
 
 const excludeDefaultFields = ['deleted_at', 'is_active', 'brand_id'];
 const HONDA = 1;
+
+const validate = async (req) => {
+    const {
+        mainModel, name,
+    } = req.body;
+    const where = { is_active: true };
+
+    if (name) where.name = name.trim();
+
+    const result = await models[mainModel].findOne({
+        attributes: { exclude: excludeDefaultFields },
+        where,
+    });
+
+    if (result) return standardResponse(true, 422, 'Ya existe un registro');
+    return false;
+};
 const create = async (req) => {
     const t = await models.sequelize.transaction();
     try {
-        const { mainModel, name } = req.body;
-        const where = { is_active: true };
+        const {
+            mainModel, ignoreValidations,
+        } = req.body;
 
-        if (name) where.name = name.trim();
-
-        const result = await models[mainModel].findOne({
-            attributes: { exclude: excludeDefaultFields },
-            where,
-        });
-
-        if (result) return standardResponse(true, 422, 'Ya existe un registro con ese nombre');
+        if (!ignoreValidations) {
+            const validation = await validate(req);
+            if (validation) return validation;
+        }
 
         const catalogCreated = await models[mainModel].create(
             {
@@ -36,7 +50,6 @@ const create = async (req) => {
             catalogCreatedPlain,
         );
     } catch (error) {
-        console.log(error);
         await t.rollback();
         return standardResponse(
             true,

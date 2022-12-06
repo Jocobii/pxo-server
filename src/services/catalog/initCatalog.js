@@ -41,7 +41,10 @@ const getAllCategories = async () => {
         const categories = models.category.findAll({
             where,
             attributes: ['id', 'name'],
-            include: [{ model: models.version, attributes: ['id', 'name'] }],
+            include: [
+                { model: models.version, attributes: ['id', 'name'] },
+                { model: models.warranty },
+            ],
         }).then((data) => {
             catalogs.carCategories = data;
         });
