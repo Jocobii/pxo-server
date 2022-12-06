@@ -8,7 +8,7 @@ const warrantiesPerYear = [
         name: 'ELITE',
         months: '12',
         distance: 20_000,
-        price: 7650.0,
+        price: 7650,
         categoryId: CITY,
     },
     {
@@ -16,7 +16,7 @@ const warrantiesPerYear = [
         name: 'ELITE',
         months: '12',
         distance: 20_000,
-        price: 7650.0,
+        price: 8050,
         categoryId: CIVIC,
     },
     {
@@ -24,7 +24,7 @@ const warrantiesPerYear = [
         name: 'ELITE',
         months: '12',
         distance: 20_000,
-        price: 7650.0,
+        price: 9400,
         categoryId: ACCORD,
     },
     {
@@ -32,7 +32,7 @@ const warrantiesPerYear = [
         name: 'ELITE',
         months: '12',
         distance: 20_000,
-        price: 7650.0,
+        price: 11100,
         categoryId: INSIGHT,
     },
     {
@@ -40,7 +40,7 @@ const warrantiesPerYear = [
         name: 'ELITE',
         months: '12',
         distance: 20_000,
-        price: 7650.0,
+        price: 8050,
         categoryId: BR_V,
     },
     {
@@ -48,7 +48,7 @@ const warrantiesPerYear = [
         name: 'ELITE',
         months: '12',
         distance: 20_000,
-        price: 7650.0,
+        price: 9400,
         categoryId: CR_V,
     },
     {
@@ -56,7 +56,7 @@ const warrantiesPerYear = [
         name: 'ELITE',
         months: '12',
         distance: 20_000,
-        price: 7650.0,
+        price: 9400,
         categoryId: PILOT,
     },
     {
@@ -64,7 +64,7 @@ const warrantiesPerYear = [
         name: 'ELITE',
         months: '12',
         distance: 20_000,
-        price: 7650.0,
+        price: 11100,
         categoryId: ODYSSEY,
     },
     {
@@ -72,7 +72,7 @@ const warrantiesPerYear = [
         name: 'ELITE',
         months: '12',
         distance: 20_000,
-        price: 7650.0,
+        price: 8050,
         categoryId: HR_V,
     },
 ];
@@ -82,7 +82,7 @@ const warrantiesPerTwoYers = [
         name: 'ELITE',
         months: '24',
         distance: 40_000,
-        price: 7650.0,
+        price: 10750,
         categoryId: CITY,
     },
     {
@@ -90,7 +90,7 @@ const warrantiesPerTwoYers = [
         name: 'ELITE',
         months: '24',
         distance: 40_000,
-        price: 7650.0,
+        price: 11250,
         categoryId: CIVIC,
     },
     {
@@ -98,7 +98,7 @@ const warrantiesPerTwoYers = [
         name: 'ELITE',
         months: '24',
         distance: 40_000,
-        price: 7650.0,
+        price: 13150,
         categoryId: ACCORD,
     },
     {
@@ -106,7 +106,7 @@ const warrantiesPerTwoYers = [
         name: 'ELITE',
         months: '24',
         distance: 40_000,
-        price: 7650.0,
+        price: 15500,
         categoryId: INSIGHT,
     },
     {
@@ -114,7 +114,7 @@ const warrantiesPerTwoYers = [
         name: 'ELITE',
         months: '24',
         distance: 40_000,
-        price: 7650.0,
+        price: 11250,
         categoryId: BR_V,
     },
     {
@@ -122,7 +122,7 @@ const warrantiesPerTwoYers = [
         name: 'ELITE',
         months: '24',
         distance: 40_000,
-        price: 7650.0,
+        price: 13150,
         categoryId: CR_V,
     },
     {
@@ -130,7 +130,7 @@ const warrantiesPerTwoYers = [
         name: 'ELITE',
         months: '24',
         distance: 40_000,
-        price: 7650.0,
+        price: 13150,
         categoryId: PILOT,
     },
     {
@@ -138,7 +138,7 @@ const warrantiesPerTwoYers = [
         name: 'ELITE',
         months: '24',
         distance: 40_000,
-        price: 7650.0,
+        price: 15500,
         categoryId: ODYSSEY,
     },
     {
@@ -146,51 +146,27 @@ const warrantiesPerTwoYers = [
         name: 'ELITE',
         months: '24',
         distance: 40_000,
-        price: 7650.0,
+        price: 11250,
         categoryId: HR_V,
     },
 ];
 
 const warrantiesPerThreeYers = [
     {
-        id: 19,
-        name: 'ELITE',
-        months: '36',
-        distance: 65_000,
-        price: 7650.0,
-        categoryId: CITY,
-    },
-    {
         id: 20,
         name: 'PREMIUM',
         months: '36',
         distance: 65_000,
-        price: 7650.0,
+        price: 14800,
         categoryId: CITY,
-    },
-    {
-        id: 21,
-        name: 'ELITE',
-        months: '36',
-        distance: 65_000,
-        price: 7650.0,
-        categoryId: CIVIC,
     },
     {
         id: 22,
         name: 'PREMIUM',
         months: '36',
         distance: 65_000,
-        price: 7650.0,
+        price: 14800,
         categoryId: CIVIC,
-    },
-    {
-        id: 23,
-        name: 'ELITE',
-        months: '36',
-        distance: 65_000,
-        price: 7650.0,
-        categoryId: ACCORD,
     },
     {
         id: 24,
@@ -201,28 +177,12 @@ const warrantiesPerThreeYers = [
         categoryId: ACCORD,
     },
     {
-        id: 25,
-        name: 'ELITE',
-        months: '36',
-        distance: 65_000,
-        price: 7650.0,
-        categoryId: INSIGHT,
-    },
-    {
         id: 26,
         name: 'PREMIUM',
         months: '36',
         distance: 65_000,
         price: 7650.0,
         categoryId: INSIGHT,
-    },
-    {
-        id: 27,
-        name: 'ELITE',
-        months: '36',
-        distance: 65_000,
-        price: 7650.0,
-        categoryId: BR_V,
     },
     {
         id: 28,
@@ -233,28 +193,12 @@ const warrantiesPerThreeYers = [
         categoryId: BR_V,
     },
     {
-        id: 29,
-        name: 'ELITE',
-        months: '36',
-        distance: 65_000,
-        price: 7650.0,
-        categoryId: CR_V,
-    },
-    {
         id: 30,
         name: 'PREMIUM',
         months: '36',
         distance: 65_000,
         price: 7650.0,
         categoryId: CR_V,
-    },
-    {
-        id: 31,
-        name: 'ELITE',
-        months: '36',
-        distance: 65_000,
-        price: 7650.0,
-        categoryId: PILOT,
     },
     {
         id: 32,
@@ -265,28 +209,12 @@ const warrantiesPerThreeYers = [
         categoryId: PILOT,
     },
     {
-        id: 33,
-        name: 'ELITE',
-        months: '36',
-        distance: 65_000,
-        price: 7650.0,
-        categoryId: ODYSSEY,
-    },
-    {
         id: 34,
         name: 'PREMIUM',
         months: '36',
         distance: 65_000,
         price: 7650.0,
         categoryId: ODYSSEY,
-    },
-    {
-        id: 35,
-        name: 'ELITE',
-        months: '36',
-        distance: 65_000,
-        price: 7650.0,
-        categoryId: HR_V,
     },
     {
         id: 36,

@@ -48,7 +48,7 @@ db.Sequelize = Sequelize;
 // para que se sincronice debe tener al final _test
 // ejemplo: pxo_test
 
-if (process.env.NODE_ENV === 'development' && ['true', 'yes'].includes(process.env.SYNC_DB)) sequelize.sync({ alter: true, match: /_test$/ });
+if (process.env.NODE_ENV === 'development' && ['true', 'yes'].includes(process.env.SYNC_DB)) sequelize.sync({ force: true, match: /_test$/ });
 
 sequelize
     .authenticate()
