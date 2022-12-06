@@ -5,11 +5,11 @@ const compression = require('compression');
 const morgan = require('morgan');
 const path = require('path');
 const helmet = require('helmet');
-const initDayjs = require('./config/dayjs');
-require('./models');
-const { errorHandler, notFound, jwtErrorHandler } = require('./middlewares/errorsHandlers');
-const corsOptions = require('./middlewares/cors');
-const jwt = require('./middlewares/jwt');
+const initDayjs = require('./src/config/dayjs');
+require('./src/models');
+const { errorHandler, notFound, jwtErrorHandler } = require('./src/middlewares/errorsHandlers');
+const corsOptions = require('./src/middlewares/cors');
+const jwt = require('./src/middlewares/jwt');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -28,11 +28,12 @@ app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 app.use(cors(corsOptions));
 app.use(jwt());
-app.use('/', require('./v1/routes/router'));
+app.use('/', require('./src/v1/routes/router'));
 
 app.use(notFound);
 app.use(errorHandler);
 app.use(jwtErrorHandler);
+
 app.listen(PORT, () => {
     console.log(`🤓 Server listening on port ${PORT}...`);
 });

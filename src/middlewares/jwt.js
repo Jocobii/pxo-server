@@ -13,6 +13,7 @@ function jwt() {
             '/api/v1/auth/refresh-token',
             '/api/v1/auth/send-code-recovery',
             '/api/v1/auth/recovery-password',
+            '/',
             // '/api/v1/policies/pdf/contract',
         ],
     });

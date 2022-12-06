@@ -11,4 +11,6 @@ router.use('/api/v1/validateByField', require('./validations'));
 router.use('/api/v1/products', require('./warranty'));
 router.use('/api/v1/catalogs', require('./catalog'));
 
+router.get('/', (_req, res) => res.json({ message: 'Welcome to the PXO API' }));
+
 module.exports = router;
