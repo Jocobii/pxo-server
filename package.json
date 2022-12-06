@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "18.x"
+    "node": "16.x"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "migrate:up": "npx sequelize-cli db:migrate",
     "migrate:down": "npx sequelize-cli db:migrate:undo",
     "lint": "eslint . --ext .js,.jsx src",
