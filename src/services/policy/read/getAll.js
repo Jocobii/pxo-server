@@ -7,11 +7,17 @@ const read = async (req) => {
     try {
         const {
             page, sortField, sortOrder, simple, agency_id,
-            vin, email,
+            vin, email, date_issue,
         } = req.query;
 
         const { where, pagination, order } = applyGeneralFilters(req.query);
         where.agency_id = agency_id;
+
+        if (date_issue) {
+            where.date_issue = {
+                [Op.like]: `%${date_issue}%`,
+            };
+        }
 
         if (vin) {
             where['$policy_detail->car.vin$'] = {

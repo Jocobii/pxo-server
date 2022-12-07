@@ -1,0 +1,160 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="css/contract.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <!-- <div class="container mb-5">
+                    <div class="row">
+                        <div class="col">
+                            <h1>CERTIFICADO DE GARANTÍA EXTENDIDA “PREMIUM”</h1>
+                        </div>
+                        <div class="col bg-light"><h1>LOGO</h1></div>
+                    </div>
+                </div> -->
+                <div class="container mb-5">
+                    <div class="row g-0 text-center">
+                        <div class="col-sm-8 col-md-8 mt-5"><h1>CERTIFICADO DE GARANTÍA EXTENDIDA “PREMIUM”</h1></div>
+                        <div class="col-6 col-md-4 d-flex justify-content-end">
+                            <div style="background-color: #122832; width: 35%;">
+                                <img  width="100%" height="100%" src="/src/public/img/PXlogopdf.png"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mb-2">
+                    <div class="row">
+                        <div class="col">
+                            <h6>No. de Extensión de Garantía:</h6>
+                        </div>
+                        <div class="col bg-light">{{ number_extension }}</div>
+                        <div class="col"><h6>Fecha emision:</h6></div>
+                        <div class="col bg-light">{{ date_issue }}</div>
+                    </div>
+                </div>
+                <div style="background-color: #46a791" class="mb-4">
+                    <div class="container p-2 text-white">
+                        <p class="fs-2">
+                            <b>BIENVENIDO</b> al programa
+                            <b>“PROTECCIÓN EXTENDIDA OPTIMA”</b>, en este
+                            momento Usted es parte de la familia Optima, el
+                            presente Certificado garantiza a nuestros clientes
+                            de la marca HONDA ampararlos contra gastos
+                            inesperados, por algún defecto de fabricación de su
+                            vehículo, una vez concluida la Garantía principal
+                            del fabricante. Ha tomado la mejor decisión,
+                            ampliando la vigencia de la cobertura de la Garantía
+                            Original del Fabricante, por lo que le recordamos
+                            que es IMPORTANTE realizar los servicios de
+                            mantenimiento dentro de la Red de concesionarios
+                            HONDA en tiempo y/o kilometrajes indicados por el
+                            fabricante, es indispensable para conservar y
+                            mantener su vehículo en óptimas condiciones. Lo
+                            invitamos a consultar los Términos & Condiciones,
+                            coberturas y exclusiones en el clausulado del
+                            contrato. Ante cualquier duda, no dude ponerse en
+                            contacto con la concesionaria HONDA donde contrato
+                            su servicio.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col"><h5>Inicio de Vigencia:</h5></div>
+                    <div class="col bg-light">
+                        {{ beginning_effective_date }}
+                    </div>
+                    <div class="col"><h5>Fin de Vigencia:</h5></div>
+                    <div class="col bg-light">{{ end_effective_date }}</div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col"><h5>Cliente/Solicitante:</h5></div>
+                    <div class="col bg-light">
+                        {{ policy_detail.customer.fullName }}
+                    </div>
+                    <div class="col"><h5>RFC:</h5></div>
+                    <div class="col bg-light">
+                        {{ policy_detail.customer.rfc }}
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col col-3"><h5>Domicilio:</h5></div>
+                    <div class="col col-9 bg-light">
+                        <div class="d-flex">
+                            <div class="p-2">
+                                <h3>
+                                    {{#each
+                                    policy_detail.customer.customer_addresses}}
+                                    {{ this.street }} {{ this.external_number }}
+                                    {{ this.inner_number }} {{ this.district }}
+                                    {{ this.zip_code }} {{/each}}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col"><h5>Modelo:</h5></div>
+                    <div class="col bg-light">
+                        {{ policy_detail.car.category.name }}
+                    </div>
+                    <div class="col"><h5>Año:</h5></div>
+                    <div class="col bg-light">
+                        {{getYear policy_detail.car.year}}
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col"><h5>VIN:</h5></div>
+                    <div class="col bg-light">{{policy_detail.car.vin}}</div>
+                    <div class="col"><h5>Kilometraje:</h5></div>
+                    <div class="col bg-light">
+                        {{policy_detail.car.mileage}}
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col col-3">
+                        <h5>Fecha de venta del vehículo:</h5>
+                    </div>
+                    <div class="col col-9 bg-light">
+                        <div class="d-flex">
+                            <div class="p-2">
+                                <h3>{{ date_issue }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="mb-4">
+                    <div class="container p-2">
+                        <p class="fs-2">
+                            En PX Optima, S.A. de C.V., tus datos personales
+                            están protegidos, de acuerdo con la ley federal de
+                            protección de datos personales en posesión de los
+                            particulares.
+                        </p>
+                    </div>
+                    <div class="container p-2 text-center">
+                        <p class="fs-2">Puedes consultar el aviso de privacidad correspondiente en: www.pxoptima.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
