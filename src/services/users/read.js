@@ -15,6 +15,7 @@ const getAllUsers = async (req) => {
                 'first_name',
                 'middle_name',
                 'first_last_name',
+                'agency_id',
                 'second_last_name',
                 'email',
             ],
