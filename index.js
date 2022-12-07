@@ -15,7 +15,7 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 initDayjs();
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, './src/public')));
 
 if (process.env.MORGAN === 'yes' && process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 app.use(compression());
@@ -37,3 +37,5 @@ app.use(jwtErrorHandler);
 app.listen(PORT, () => {
     console.log(`🤓 Server listening on port ${PORT}...`);
 });
+
+module.exports = app;

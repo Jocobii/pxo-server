@@ -21,7 +21,7 @@ const queryForGetPolicy = async (where) => models.policy.findOne({
         },
         {
             model: models.warranty,
-            attributes: ['price'],
+            attributes: ['price', 'name'],
         },
         {
             model: models.policy_detail,
@@ -55,7 +55,7 @@ const createContract = async (req) => {
         where.id = id;
 
         const result = await queryForGetPolicy(where);
-
+        console.log(plainObject(result));
         if (!result) return standardResponse(true, 404, 'No se encontró la póliza');
 
         const html = await fs.readFile(path.join(__dirname, '../../../views/policy/contract.handlebars'), 'utf8');
