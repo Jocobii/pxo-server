@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const whitelist = [process.env.BASE_URL, 'http://example2.com'];
+const whitelist = [process.env.BASE_URL, 'https://pxo-app.vercel.app/', 'https://pxo-app.vercel.app'];
 
 const corsOptions = {
     origin(origin, callback) {
