@@ -12,115 +12,112 @@
         <title>Document</title>
     </head>
     <body>
-        <div class="container">
+        <div>
             <div>
-                <div class="row">
-                    <div class="col-12">
-                        <img src="img/pxo-optima.png" width="100px" />
+                <div class="container mb-5">
+                    <div class="row g-0 text-center">
+                        <div class="col-sm-6 col-md-8 mt-5"><h1><b>CERTIFICADO DE GARANTÍA EXTENDIDA “{{ warranty.name }}”</b></h1></div>
+                        <div class="col-6 col-md-4 d-flex justify-content-end">
+                            <div style="background-color: #122832; width: 35%;">
+                                <img  width="100%" height="100%" src="/public/img/PXlogopdf.png"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="d-flex mb-3 flex-row-reverse bg-secondary">
-                    <div class="p-2 text-white">
-                        <h3>EXTENSION DE GARANTIA</h3>
+                <div class="container mb-2">
+                    <div class="row">
+                        <div class="col"><p>No. de Extensión de Garantía: </p></div>
+                        <div class="col bg-light">{{ number_extension }}</div>
+                        <div class="col"><p>Fecha emision:</p></div>
+                        <div class="col bg-light">{{ date_issue }}</div>
                     </div>
                 </div>
-                <!-- Caratula info contract.handlebars -->
-                <div class="row">
-                    <div class="col"><h5>Numero Extensión Garantía:</h5></div>
-                    <div class="col bg-light">{{ number_extension }}</div>
-                    <div class="col"><h5>Fecha emision:</h5></div>
-                    <div class="col bg-light">{{ date_issue }}</div>
+                <div style="background-color: #46A791; width: 100%;" class="mb-4">
+                    <div class="container p-2 text-white">
+                        <p class="fs-2"><b>BIENVENIDO</b> al programa <b>“PROTECCIÓN EXTENDIDA OPTIMA”</b>, en este momento Usted es parte de la familia Optima, el presente Certificado
+                            garantiza a nuestros clientes de la marca HONDA ampararlos contra gastos inesperados, por algún defecto de fabricación de su vehículo, una
+                            vez concluida la Garantía principal del fabricante.
+                            Ha tomado la mejor decisión, ampliando la vigencia de la cobertura de la Garantía Original del Fabricante, por lo que le recordamos que es
+                            IMPORTANTE realizar los servicios de mantenimiento dentro de la Red de concesionarios HONDA en tiempo y/o kilometrajes indicados por el
+                            fabricante, es indispensable para conservar y mantener su vehículo en óptimas condiciones.
+                            Lo invitamos a consultar los Términos & Condiciones, coberturas y exclusiones en el clausulado del contrato. Ante cualquier duda, no dude
+                            ponerse en contacto con la concesionaria HONDA donde contrato su servicio.</p>
+                    </div>
                 </div>
+            </div>
+            <div class="container">
                 <div class="row">
-                    <div class="col"><h5>Inicio de Vigencia:</h5></div>
+                    <div class="col"><p>Inicio de Vigencia:</p></div>
                     <div class="col bg-light">{{ beginning_effective_date }}</div>
-                    <div class="col"><h5>Fin de Vigencia:</h5></div>
+                    <div class="col"><p>Fin de Vigencia:</p></div>
                     <div class="col bg-light">{{ end_effective_date }}</div>
                 </div>
-                <div class="d-flex flex-row-reverse">
-                    <p>*Lo que suceda primero</p>
-                </div>
+                <br />
                 <div class="row">
-                    <div class="col col-3"><h5>Descripción del Vehículo:</h5></div>
+                    <div class="col"><p>Cliente/Solicitante:</p></div>
+                    <div class="col bg-light">{{ policy_detail.customer.fullName }}</div>
+                    <div class="col"><p>RFC:</p></div>
+                    <div class="col bg-light">{{ policy_detail.customer.rfc }}</div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col col-3"><p>Domicilio:</p></div>
                     <div class="col col-9 bg-light">
                         <div class="d-flex">
                             <div class="p-2">
-                                Marca y Tipo: HONDA
-                                {{ policy_detail.car.category.name }} {{ policy_detail.car.version.name }}
+                                {{#each policy_detail.customer.customer_addresses}}
+                                    {{ this.street }}
+                                    {{ this.external_number }}
+                                    {{ this.inner_number }}
+                                    {{ this.district }}
+                                    {{ this.zip_code }}
+                                {{/each}}
                             </div>
-                            <div class="p-2">Modelo: {{getYear policy_detail.car.year}}</div>
-                            <div class="p-2">Número VIN: {{policy_detail.car.vin}}</div>
                         </div>
                     </div>
                 </div>
                 <br />
                 <div class="row">
-                    <div class="col col-3"></div>
+                    <div class="col"><p>Modelo:</p></div>
+                    <div class="col bg-light">{{ policy_detail.car.category.name }}</div>
+                    <div class="col"><p>Año:</p></div>
+                    <div class="col bg-light">{{getYear policy_detail.car.year}}</div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col"><p>VIN:</p></div>
+                    <div class="col bg-light">{{policy_detail.car.vin}}</div>
+                    <div class="col"><p>Kilometraje:</p></div>
+                    <div class="col bg-light">{{policy_detail.car.mileage}}</div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col col-3"><p>Fecha de venta del vehículo:</p></div>
                     <div class="col col-9 bg-light">
                         <div class="d-flex">
-                            <div class="p-2">Fecha venta vehículo como:</div>
                             <div class="p-2">{{ date_issue }}</div>
-                            <div class="p-2">Kilometraje</div>
-                            <div class="p-2"> {{policy_detail.car.mileage}} KM</div>
                         </div>
                     </div>
                 </div>
                 <br />
                 <div class="row">
-                    <div class="col col-3"></div>
-                    <div class="col col-9 bg-light">
-                        <div class="d-flex">
-                            <div class="p-2">
-                                Nombre ó Denominación y Representante / RFC:
-                            </div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="p-2">
-                                <h2>{{ policy_detail.customer.fullName}}</h2>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="col"><p>IMPORTE:</p></div>
+                    <div class="col bg-light"></div>
+                    <div class="col"><p>$:</p></div>
+                    <div class="col bg-light">{{ warranty.price }}</div>
                 </div>
                 <br />
-                <div class="row">
-                    <div class="col col-3"></div>
-                    <div class="col col-9 bg-light">
-                        <div class="d-flex">
-                            <div class="p-2">Domicilio</div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="p-2">
-                                <h3>
-                                    {{#each policy_detail.customer.customer_addresses}}
-                                        {{ this.street }}
-                                        {{ this.external_number }}
-                                        {{ this.inner_number }}
-                                        {{ this.district }}
-                                        {{ this.zip_code }}
-                                    {{/each}}
-                                </h3>
-                            </div>
-                        </div>
+                <div class="mb-4">
+                    <div class="container p-2">
+                        <p class="fs-2">
+                            En PX Optima, S.A. de C.V., tus datos personales
+                            están protegidos, de acuerdo con la ley federal de
+                            protección de datos personales en posesión de los
+                            particulares.
+                        </p>
                     </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col col-3"></div>
-                    <div class="col col-9 bg-light">
-                        <div class="d-flex">
-                            <div class="p-2">Protección Amecah S.A. de C.V. (PAM110216-Q38) atraves de: Servicios
-                                Ordas S.A. de C.V. (SOR070511-UW1) y/o el Concesionario Y/O
-                                SANTANDER CONSUMO, S.A. DE C.V. SOFOM E.R., GRUPO FINANCIERO</div>
-                            <div class="p-2"><h3>${{ warranty.price }} MXN</h3></div>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col col-3"><h5>Concesionario:</h5></div>
-                    <div class="col col-9 bg-light">
-                        {{ agency.code }}  {{ agency.name}}
-                        {{!-- <h4>{{ policy_detail.car_dealer.name }}</h4> --}}
+                    <div class="container p-2 text-center">
+                        <p class="fs-2">Puedes consultar el aviso de privacidad correspondiente en: <b>www.pxoptima.com</b></p>
                     </div>
                 </div>
             </div>
