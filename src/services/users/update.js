@@ -10,6 +10,7 @@ const updateUser = async (req) => {
         first_last_name,
         second_last_name,
         email,
+        agency_id,
         password,
     } = req.body;
 
@@ -23,6 +24,7 @@ const updateUser = async (req) => {
         first_last_name,
         second_last_name,
         email,
+        agency_id,
     };
 
     if (password) {
@@ -38,6 +40,7 @@ const updateUser = async (req) => {
         first_last_name: updatedUser.first_last_name,
         second_last_name: updatedUser.second_last_name,
         email: updatedUser.email,
+        agency_id: Number(updatedUser.agency_id),
     };
 
     return standardResponse(false, 200, 'El usuario fue actualizado', userUpdeted);
